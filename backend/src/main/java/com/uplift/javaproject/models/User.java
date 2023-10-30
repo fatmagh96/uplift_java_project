@@ -83,6 +83,25 @@ public class User {
 	private Charity charity;
 	
 	
+	// M:M Users to Event = Participants
+//    @ManyToMany
+//    @JoinTable(
+//        name = "event_participants",
+//        joinColumns = @JoinColumn(name = "user_id"),
+//        inverseJoinColumns = @JoinColumn(name = "event_id")
+//    )
+//    private List<Event> events;
+	
+	
+	public Charity getCharity() {
+		return charity;
+	}
+
+	public void setCharity(Charity charity) {
+		this.charity = charity;
+	}
+
+
 	// Empty constructor
 	public User() {}
 	

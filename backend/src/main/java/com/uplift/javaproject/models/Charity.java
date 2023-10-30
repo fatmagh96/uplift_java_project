@@ -19,6 +19,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -30,7 +31,7 @@ import jakarta.validation.constraints.NotNull;
 @Transactional
 @Entity
 @Table(name = "charities")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Charity {
 
 	// Member variables
@@ -75,11 +76,17 @@ public class Charity {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	// M:M Charity to Address
+	
+
+	// M:M Charity to Category
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "charities_categories", joinColumns = @JoinColumn(name = "charity_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "eventCreator", fetch = FetchType.LAZY)
+	private List<Event> charityEvents;
 
 	// Empty constructor
 	public Charity() {
@@ -103,6 +110,14 @@ public class Charity {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public List<Event> getCharityEvents() {
+		return charityEvents;
+	}
+
+	public void setCharityEvents(List<Event> charityEvents) {
+		this.charityEvents = charityEvents;
 	}
 
 	public String getName() {

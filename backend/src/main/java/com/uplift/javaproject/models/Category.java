@@ -30,13 +30,28 @@ public class Category {
 	@Enumerated(EnumType.STRING)
 	private Categories categoryName;
 
-	// M:M Charity to Address
+	// M:M Charity to Category
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "charities_categories", joinColumns = @JoinColumn(name = "category_id"), inverseJoinColumns = @JoinColumn(name = "charity_id"))
 	private List<Charity> charities;
+	
+	
+	// M:M Event to Category
+		@JsonIgnore
+		@ManyToMany(fetch = FetchType.LAZY)
+		@JoinTable(name = "events_categories", joinColumns = @JoinColumn(name = "eventCategory_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
+		private List<Event> events;
 
 	public Category() {}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
 
 	public Long getId() {
 		return id;

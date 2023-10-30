@@ -17,27 +17,41 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "addresses")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Address {
 
 	// Member variables
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotEmpty(message="street is required!")
+
+	@NotEmpty(message = "street is required!")
 	private String street;
 	@Enumerated(EnumType.STRING)
 	private Cities city;
-	@NotEmpty(message="zipCode is required!")
+	@NotEmpty(message = "zipCode is required!")
 	private String zipCode;
-	
-	public Address() {}
-	
+
+	public Address() {
+	}
+
 	// 1:1 Address Relation Charity ------------------------
 	@JsonIgnore
 	@OneToOne(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Charity charity;
+
+	// 1:1 Address Relation Event ------------------------
+	@JsonIgnore
+	@OneToOne(mappedBy = "eventAddress", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Event event;
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
 
 	public Long getId() {
 		return id;
@@ -78,8 +92,5 @@ public class Address {
 	public void setCharity(Charity charity) {
 		this.charity = charity;
 	}
-	
-	
-	
-	
+
 }
