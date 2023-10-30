@@ -24,4 +24,11 @@ public class CharityService {
 		return charityRepo.save(c);
 	}
 
+	public Charity findCharityById(Long id) {
+		return charityRepo.findById(id).get();
+	}
+	
+	public Charity updateCharity(Charity c) {
+		return charityRepo.save(c);
+	}
 }

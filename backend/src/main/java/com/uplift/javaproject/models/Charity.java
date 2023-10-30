@@ -76,7 +76,11 @@ public class Charity {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	
+	// M:M Users to Event = Participants
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "charities_followers", joinColumns = @JoinColumn(name = "charity_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> followers;
 
 	// M:M Charity to Category
 	@JsonIgnore
@@ -103,6 +107,15 @@ public class Charity {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
+	
+
+	public List<User> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<User> followers) {
+		this.followers = followers;
+	}
 
 	public Long getId() {
 		return id;
@@ -111,7 +124,7 @@ public class Charity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public List<Event> getCharityEvents() {
 		return charityEvents;
 	}

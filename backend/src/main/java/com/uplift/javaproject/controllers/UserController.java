@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uplift.javaproject.models.Charity;
 import com.uplift.javaproject.models.LoginUser;
 import com.uplift.javaproject.models.User;
+import com.uplift.javaproject.services.CharityService;
 import com.uplift.javaproject.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,6 +31,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userServ;
+
+	@Autowired
+	private CharityService charityServ;
 
 //	@GetMapping("/users")
 //	public ResponseEntity<?> allUsers(){
@@ -109,6 +114,34 @@ public class UserController {
 		}
 	}
 
+	// FOLLOW -------------------------------------------------------
+
+	@PostMapping("/charities/follow/{charityId}")
+	public ResponseEntity<Object> followCharity(@PathVariable("charityId") Long charityId, HttpSession session) {
+
+		User follower = userServ.findUserById((Long) session.getAttribute("user_id"));
+		Charity charity = charityServ.findCharityById(charityId);
+
+		charity.getFollowers().add(follower);
+		charityServ.updateCharity(charity);
+		return ResponseEntity.ok("User successfully Followed a charity!");
+	}
+
+	// UNFOLLOW -------------------------------------------------------
+
+	@PostMapping("/charities/unfollow/{charityId}")
+	public ResponseEntity<Object> unfollowCharity(@PathVariable("charityId") Long charityId, HttpSession session) {
+
+		User follower = userServ.findUserById((Long) session.getAttribute("user_id"));
+		Charity charity = charityServ.findCharityById(charityId);
+
+		charity.getFollowers().remove(follower);
+		charityServ.updateCharity(charity);
+		return ResponseEntity.ok("User Unfollowed a charity!");
+	}
+
+	
+	// LOGOUT
 	@GetMapping("/logout")
 	public ResponseEntity<?> logout(HttpSession session) {
 		session.invalidate();

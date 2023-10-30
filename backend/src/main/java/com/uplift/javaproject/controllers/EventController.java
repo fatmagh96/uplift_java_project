@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,7 @@ public class EventController {
 
 	@Autowired
 	private EventService eventServ;
-	
+
 	@Autowired
 	private UserService userServ;
 
@@ -75,10 +76,10 @@ public class EventController {
 
 		// Set the Address for event
 		event.setEventAddress(savedAddress);
-		
+
 		// Getting Event Creator
 		User eventCreator = userServ.findUserById((Long) session.getAttribute("user_id"));
-		
+
 		event.setEventCreator(eventCreator.getCharity());
 
 		// Saving the Event
@@ -86,4 +87,27 @@ public class EventController {
 
 		return new ResponseEntity<>(savedEvent, HttpStatus.OK);
 	}
+
+	@PostMapping("/events/participate/{eventId}")
+	public ResponseEntity<Object> participateInEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
+
+		User participant = userServ.findUserById((Long) session.getAttribute("user_id"));
+		Event event = eventServ.findEventById(eventId);
+
+		event.getParticipants().add(participant);
+		eventServ.updateEvent(event);
+		return ResponseEntity.ok("User successfully participated in Event!");
+	}
+	
+	@PostMapping("/events/quit/{eventId}")
+	public ResponseEntity<Object> quitEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
+
+		User participant = userServ.findUserById((Long) session.getAttribute("user_id"));
+		Event event = eventServ.findEventById(eventId);
+
+		event.getParticipants().remove(participant);
+		eventServ.updateEvent(event);
+		return ResponseEntity.ok("User successfully Quit Event!");
+	}
+
 }

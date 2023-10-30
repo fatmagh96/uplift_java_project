@@ -52,10 +52,10 @@ public class Event {
 	private Charity eventCreator;
 
 	// M:M Users to Event = Participants
-//	@JsonIgnore
-//	@ManyToMany
-//	@JoinTable(name = "event_participants", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-//	private List<User> participants;
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "event_participants", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> participants;
 
 	
 
@@ -138,5 +138,15 @@ public class Event {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+	public List<User> getParticipants() {
+		return participants;
+	}
+
+
+	public void setParticipants(List<User> participants) {
+		this.participants = participants;
 	}
 }

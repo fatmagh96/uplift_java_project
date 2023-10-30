@@ -23,4 +23,12 @@ public class EventService {
 	public Event createEvent(Event c) {
 		return eventRepo.save(c);
 	}
+	
+	public Event findEventById(Long id) {
+		return eventRepo.findById(id).get();
+	}
+	
+	public Event updateEvent(Event c) {
+		return eventRepo.save(c);
+	}
 }

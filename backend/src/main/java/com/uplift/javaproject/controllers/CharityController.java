@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uplift.javaproject.models.Address;
-import com.uplift.javaproject.models.Categories;
 import com.uplift.javaproject.models.Category;
 import com.uplift.javaproject.models.Charity;
 import com.uplift.javaproject.models.CharityAndAddressAndCategoriesRequest;
@@ -102,16 +101,16 @@ public class CharityController {
 	    Charity charity = request.getCharity();
 	    Address address = request.getAddress();
 	    List<Category> categories = request.getCategories();
-	    
-	    //
-	    System.out.println(categories);
-	    System.out.println(categories.get(0).getCategoryName());
-	    Categories name = categories.get(0).getCategoryName();
-	    System.out.println("this is nammeeeee : "+name);
-	    Category c = categoryServ.findByCategoryName(name);
-	    System.out.println("this is category "+c);
-	    
-	    //
+//	    
+//	    //
+//	    System.out.println(categories);
+//	    System.out.println(categories.get(0).getCategoryName());
+//	    Categories name = categories.get(0).getCategoryName();
+//	    System.out.println("this is nammeeeee : "+name);
+//	    Category c = categoryServ.findByCategoryName(name);
+//	    System.out.println("this is category "+c);
+//	    
+//	    //
 	    
 	    
 	    // Save the address

@@ -1,6 +1,7 @@
 package com.uplift.javaproject.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,6 +16,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
@@ -26,73 +29,105 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
-
 @Transactional
 @Entity
-@Table(name="users")
+@Table(name = "users")
 //@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class User {
 
 	// Member variables
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-    @NotEmpty(message="First Name is required!")
-    @Size(min=3, max=30, message="First Name must be between 3 and 30 characters")
+
+	@NotEmpty(message = "First Name is required!")
+	@Size(min = 3, max = 30, message = "First Name must be between 3 and 30 characters")
 	private String firstName;
-    
-    @NotEmpty(message="Last Name is required!")
-    @Size(min=3, max=30, message="Last Name must be between 3 and 30 characters")
+
+	@NotEmpty(message = "Last Name is required!")
+	@Size(min = 3, max = 30, message = "Last Name must be between 3 and 30 characters")
 	private String lastName;
-	
-    @NotEmpty(message="Email is required!")
-    @Email(message="Please enter a valid email!")
+
+	@NotEmpty(message = "Email is required!")
+	@Email(message = "Please enter a valid email!")
 	private String email;
-	
-	@NotEmpty(message="Password is required!")
-    @Size(min=8, max=128, message="Password must be between 8 and 128 characters")
+
+	@NotEmpty(message = "Password is required!")
+	@Size(min = 8, max = 128, message = "Password must be between 8 and 128 characters")
 	private String password;
-	
+
 	@Transient
 //    @NotEmpty(groups = {Default.class},message="Confirm Password is required!")
 //    @Size(min=8, max=128, message="Confirm Password must be between 8 and 128 characters")
 	private String confirm;
-	
+
 	private Boolean isBanned = false;
-	
+
 	// This will not allow the createdAt column to be updated after creation
-	@Column(updatable=false)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Column(updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
 
 	// M:1 Roles -----------------------------------------
-	
+
 //	@JsonBackReference
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="role_id")
+	@JoinColumn(name = "role_id")
 	private Role role;
-	
+
 	// 1:1 Owner Relation Charity ------------------------
-	
-	@OneToOne(mappedBy = "founder",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+	@OneToOne(mappedBy = "founder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Charity charity;
-	
-	
+
 	// M:M Users to Event = Participants
-//    @ManyToMany
-//    @JoinTable(
-//        name = "event_participants",
-//        joinColumns = @JoinColumn(name = "user_id"),
-//        inverseJoinColumns = @JoinColumn(name = "event_id")
-//    )
-//    private List<Event> events;
+	@ManyToMany
+	@JoinTable(name = "event_participants", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
+	private List<Event> participatedEvents;
+
+	// M:M Users to Charities = follow
+	@ManyToMany
+	@JoinTable(name = "charities_followers", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "charity_id"))
+	private List<Charity> followedCharities;
+
 	
+
+	// Empty constructor
+	public User() {
+	}
+
+	// Getters and setters
+
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = new Date();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		this.updatedAt = new Date();
+	}
 	
+	public List<Charity> getFollowedCharities() {
+		return followedCharities;
+	}
+
+	public void setFollowedCharities(List<Charity> followedCharities) {
+		this.followedCharities = followedCharities;
+	}
+
+	public List<Event> getParticipatedEvents() {
+		return participatedEvents;
+	}
+
+	public void setParticipatedEvents(List<Event> participatedEvents) {
+		this.participatedEvents = participatedEvents;
+	}
+
 	public Charity getCharity() {
 		return charity;
 	}
@@ -100,21 +135,6 @@ public class User {
 	public void setCharity(Charity charity) {
 		this.charity = charity;
 	}
-
-
-	// Empty constructor
-	public User() {}
-	
-	// Getters and setters
-	
-	@PrePersist
-    protected void onCreate(){
-        this.createdAt = new Date();
-    }
-    @PreUpdate
-    protected void onUpdate(){
-        this.updatedAt = new Date();
-    }
 
 	public Role getRole() {
 		return role;
@@ -179,7 +199,5 @@ public class User {
 	public void setIsBanned(Boolean isBanned) {
 		this.isBanned = isBanned;
 	}
-	
-	
-	
+
 }
