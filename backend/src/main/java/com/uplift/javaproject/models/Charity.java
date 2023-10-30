@@ -23,9 +23,11 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+@Transactional
 @Entity
 @Table(name = "charities")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
