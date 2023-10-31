@@ -1,4 +1,4 @@
-package com.uplift.javaproject.models;
+package com.uplift.javaproject.models.enums;
 
 public enum Cities {
 

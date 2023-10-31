@@ -2,6 +2,7 @@ package com.uplift.javaproject.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.uplift.javaproject.models.enums.Cities;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

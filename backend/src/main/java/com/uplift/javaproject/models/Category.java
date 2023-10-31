@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.uplift.javaproject.models.enums.Categories;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,7 +20,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Categories")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Category {
 
 	// Member variables
@@ -35,15 +36,15 @@ public class Category {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "charities_categories", joinColumns = @JoinColumn(name = "category_id"), inverseJoinColumns = @JoinColumn(name = "charity_id"))
 	private List<Charity> charities;
-	
-	
-	// M:M Event to Category
-		@JsonIgnore
-		@ManyToMany(fetch = FetchType.LAZY)
-		@JoinTable(name = "events_categories", joinColumns = @JoinColumn(name = "eventCategory_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
-		private List<Event> events;
 
-	public Category() {}
+	// M:M Event to Category
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "events_categories", joinColumns = @JoinColumn(name = "eventCategory_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
+	private List<Event> events;
+
+	public Category() {
+	}
 
 	public List<Event> getEvents() {
 		return events;
@@ -76,6 +77,5 @@ public class Category {
 	public void setCharities(List<Charity> charities) {
 		this.charities = charities;
 	}
-	
-	
+
 }

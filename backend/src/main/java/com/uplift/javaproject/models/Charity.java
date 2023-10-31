@@ -7,7 +7,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.uplift.javaproject.models.enums.CharityStatus;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -72,14 +74,16 @@ public class Charity {
 
 	// 1:1 Address Relation Charity ------------------------
 	@JsonIgnore
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private Address address;
 
 	// M:M Users to Event = Participants
 	@JsonIgnore
-	@ManyToMany
-	@JoinTable(name = "charities_followers", joinColumns = @JoinColumn(name = "charity_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "charities_followers", 
+						joinColumns = @JoinColumn(name = "charity_id"), 
+						inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> followers;
 
 	// M:M Charity to Category
@@ -88,8 +92,9 @@ public class Charity {
 	@JoinTable(name = "charities_categories", joinColumns = @JoinColumn(name = "charity_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
 
+	// 1:M Charity to Event
 	@JsonIgnore
-	@OneToMany(mappedBy = "eventCreator", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "eventCreator", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Event> charityEvents;
 
 	// Empty constructor

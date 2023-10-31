@@ -31,4 +31,8 @@ public class CharityService {
 	public Charity updateCharity(Charity c) {
 		return charityRepo.save(c);
 	}
+	
+	public void deleteCharityById(Long id) {
+		charityRepo.deleteById(id);
+	}
 }
