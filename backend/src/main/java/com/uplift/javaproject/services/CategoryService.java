@@ -3,8 +3,8 @@ package com.uplift.javaproject.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uplift.javaproject.models.Categories;
 import com.uplift.javaproject.models.Category;
+import com.uplift.javaproject.models.enums.Categories;
 import com.uplift.javaproject.repositories.CategoryRepository;
 
 @Service

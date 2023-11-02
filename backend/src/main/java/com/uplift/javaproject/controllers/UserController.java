@@ -95,6 +95,9 @@ public class UserController {
 		return userServ.findUserById(id);
 	}
 
+	
+	// Update User
+	
 	@PutMapping("/users/{id}")
 	public ResponseEntity<?> updateUser(@Valid @RequestBody User newUser, BindingResult result,
 			@PathVariable("id") Long user_id) {
@@ -103,7 +106,7 @@ public class UserController {
 			System.out.println("testetstetstestes  :" + user.getRole().getRoleName());
 			user.setFirstName(newUser.getFirstName());
 			user.setLastName(newUser.getLastName());
-			user.setEmail(newUser.getEmail());
+//			user.setEmail(newUser.getEmail());
 
 			User savedUser = userServ.updateUser(user);
 
@@ -141,11 +144,30 @@ public class UserController {
 	}
 
 	
+	
 	// LOGOUT
 	@GetMapping("/logout")
 	public ResponseEntity<?> logout(HttpSession session) {
 		session.invalidate();
 		return ResponseEntity.ok("User logged out successfully!");
 	}
+	
+	
+	// BAN a user
+	@PutMapping("/users/ban/{userId}")
+	public ResponseEntity<?> banUser(@PathVariable("userId") Long user_id){
+		
+		try {
+			User user = userServ.findUserById(user_id);
+			user.setIsBanned(true);
+			userServ.updateUser(user);
+
+			return ResponseEntity.ok("User Banned successfully!");
+		} catch (Exception e) {
+			e.printStackTrace(); // Print the exception details to the console for debugging
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 
 }
