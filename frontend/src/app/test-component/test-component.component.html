@@ -1,1 +1,41 @@
-<p>test-component works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-danger">User Registration</h1>
+        <form #login="ngForm" (ngSubmit)="submit(login.value)">
+            <div>
+                <label for="">First Name:</label>
+                <input #firstName="ngModel" type="text" name="firstName" id="" ngModel>
+            </div>
+
+            <div>
+                <label for="">Last Name:</label>
+                <input type="text" name="lastName" id="" ngModel>
+            </div>
+
+            <div>
+                <label for="">Email:</label>
+                <input type="text" name="email" id="" ngModel>
+            </div>
+
+            <div>
+                <label for="">Password:</label>
+                <input type="text" name="password" id="" ngModel>
+            </div> 
+
+            <div>
+                <label for="">Confirm Password:</label>
+                <input type="text" name="confirm" id="" ngModel>
+            </div> 
+
+            <input type="submit" value="submit">
+        </form>
+    </div>
+</body>
+</html>
