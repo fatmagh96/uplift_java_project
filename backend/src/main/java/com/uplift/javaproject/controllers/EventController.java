@@ -8,9 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -88,6 +90,48 @@ public class EventController {
 		return new ResponseEntity<>(savedEvent, HttpStatus.OK);
 	}
 
+	// Update Event
+	@PutMapping("/events/{eventId}")
+	public ResponseEntity<Object> updateEvent(@PathVariable Long eventId,
+			@Valid @RequestBody EventAndAddressAndCategoriesRequest request, BindingResult result) {
+
+		Event existingEvent = eventServ.findEventById(eventId);
+
+		if (existingEvent == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not found.");
+		}
+
+		Event updatedEvent = request.getEvent();
+		existingEvent.setTitle(updatedEvent.getTitle());
+		existingEvent.setStartDate(updatedEvent.getStartDate());
+		existingEvent.setEndDate(updatedEvent.getEndDate());
+		existingEvent.setDescription(updatedEvent.getDescription());
+
+		// Update Address
+		Address updatedAddress = request.getAddress();
+		existingEvent.getEventAddress().setStreet(updatedAddress.getStreet());
+		existingEvent.getEventAddress().setCity(updatedAddress.getCity());
+
+		// Update Categories
+		List<Category> updatedCategories = request.getCategories();
+		List<Category> savedCategories = new ArrayList<>();
+		for (Category category : updatedCategories) {
+			Category savedCategory = categoryServ.findByCategoryName(category.getCategoryName());
+			if (savedCategory != null) {
+				savedCategories.add(savedCategory);
+			}
+		}
+		
+		existingEvent.setEventCategories(savedCategories);
+		
+		// Save the updated Event 
+		Event updated = eventServ.updateEvent(existingEvent);
+
+		return ResponseEntity.ok(updated);
+	}
+	
+	// Participate or Quit an Event
+
 	@PostMapping("/events/participate/{eventId}")
 	public ResponseEntity<Object> participateInEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
 
@@ -98,7 +142,7 @@ public class EventController {
 		eventServ.updateEvent(event);
 		return ResponseEntity.ok("User successfully participated in Event!");
 	}
-	
+
 	@PostMapping("/events/quit/{eventId}")
 	public ResponseEntity<Object> quitEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
 
@@ -110,4 +154,12 @@ public class EventController {
 		return ResponseEntity.ok("User successfully Quit Event!");
 	}
 
+	
+	// delete an Event
+	@DeleteMapping("/events/{eventId}")
+	public ResponseEntity<Object> deleteEvent(@PathVariable Long eventId) {
+		eventServ.deleteEvent(eventId);
+		return ResponseEntity.ok("Event successfully deleted!");
+	}
+	
 }

@@ -77,6 +77,15 @@
 			<artifactId>jbcrypt</artifactId>
 			<version>0.4</version>
 		</dependency>
+
+		<!--		Stripe dependency-->
+
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>24.0.0</version>
+		</dependency>
+
 		<!-- DEPENDENCIES FOR BOOTSTRAP -->
 		<dependency>
 			<groupId>org.webjars</groupId>

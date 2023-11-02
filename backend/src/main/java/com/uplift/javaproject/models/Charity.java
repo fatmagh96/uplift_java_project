@@ -96,6 +96,11 @@ public class Charity {
 	@JsonIgnore
 	@OneToMany(mappedBy = "eventCreator", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Event> charityEvents;
+	
+	// 1:M Charity to Donations
+	@JsonIgnore
+	@OneToMany(mappedBy = "recipient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Donation> donationsReceived;
 
 	// Empty constructor
 	public Charity() {
