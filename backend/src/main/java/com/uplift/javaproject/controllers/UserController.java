@@ -2,6 +2,7 @@ package com.uplift.javaproject.controllers;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -119,14 +120,28 @@ public class UserController {
 
 	// UPDATE PASSWORD
 	
-	@PutMapping("/users/changePassword/{id}")
+	@PutMapping("/users/changePassword")
 	public ResponseEntity<?> updatePassword(@Valid @RequestBody User newUser, BindingResult result,
-			@PathVariable("id") Long user_id) {
+			HttpSession session) {
 		try {
-			User user = userServ.findUserById(user_id);
-			User savedUser = userServ.updatePassword(user, result);
+			Long userId = (Long) session.getAttribute("user_id");
+			User user = userServ.findUserById(userId);
+			if (!newUser.getPassword().equals(newUser.getConfirm())) {
+				result.rejectValue("password", "regError", "Password and Confirm password must match :)");
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+//			if (result.hasErrors()) {
+//			}
+			else {	
+				String hashedPW = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
+				user.setPassword(hashedPW);
+				System.out.println("heloooo");
+				user = userServ.updateUser(user);
+			
+			return new ResponseEntity<>(user, HttpStatus.OK);
+			}
+			
 
-			return new ResponseEntity<>(savedUser, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace(); // Print the exception details to the console for debugging
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -84,23 +84,6 @@ public class UserService {
 		return userRep.save(user);
 	}
 	
-	// CHANGE PASSWORD
-	public User updatePassword(User user, BindingResult result) {
-		
-		if (!user.getPassword().equals(user.getConfirm())) {
-			result.rejectValue("password", "regError", "Password and Confirm password must match :)");
-		}
-		if (result.hasErrors()) {
-			return null;
-		}
-		else {
-			
-			String hashedPW = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-			user.setPassword(hashedPW);
-			
-			user = userRep.save(user);
-		return user;
-		}
-	}
+
 
 }
