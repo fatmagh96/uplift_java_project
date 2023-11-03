@@ -119,7 +119,7 @@ public class UserController {
 
 	// UPDATE PASSWORD
 	
-	@PutMapping("/users/{id}")
+	@PutMapping("/users/changePassword/{id}")
 	public ResponseEntity<?> updatePassword(@Valid @RequestBody User newUser, BindingResult result,
 			@PathVariable("id") Long user_id) {
 		try {
