@@ -130,8 +130,7 @@ public class UserController {
 				result.rejectValue("password", "regError", "Password and Confirm password must match :)");
 				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-//			if (result.hasErrors()) {
-//			}
+
 			else {	
 				String hashedPW = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
 				user.setPassword(hashedPW);
