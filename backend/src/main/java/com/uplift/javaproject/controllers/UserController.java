@@ -117,6 +117,23 @@ public class UserController {
 		}
 	}
 
+	// UPDATE PASSWORD
+	
+	@PutMapping("/users/{id}")
+	public ResponseEntity<?> updatePassword(@Valid @RequestBody User newUser, BindingResult result,
+			@PathVariable("id") Long user_id) {
+		try {
+			User user = userServ.findUserById(user_id);
+			User savedUser = userServ.updatePassword(user, result);
+
+			return new ResponseEntity<>(savedUser, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace(); // Print the exception details to the console for debugging
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	
 	// FOLLOW -------------------------------------------------------
 
 	@PostMapping("/charities/follow/{charityId}")
