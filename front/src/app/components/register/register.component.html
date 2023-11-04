@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-danger">User Registration</h1>
+        <form  (ngSubmit)="submit()">
+            <div>
+              <label for="firstName">First Name:</label>
+              <input type="text" name="firstName" id="firstName" [(ngModel)]="user.firstName" required>
+            </div>
+          
+            <div>
+              <label for="lastName">Last Name:</label>
+              <input type="text" name="lastName" id="lastName" [(ngModel)]="user.lastName" required>
+            </div>
+          
+            <div>
+              <label for="email">Email:</label>
+              <input type="email" name="email" id="email" [(ngModel)]="user.email" required>
+            </div>
+          
+            <div>
+              <label for="password">Password:</label>
+              <input type="password" name="password" id="password" [(ngModel)]="user.password" required>
+            </div>
+          
+            <div>
+              <label for="confirm">Confirm Password:</label>
+              <input type="password" name="confirm" id="confirm" [(ngModel)]="user.confirm" required>
+            </div>
+          
+            <input type="submit" value="Submit">
+          </form>
+          
+    </div>
+</body>
+</html>

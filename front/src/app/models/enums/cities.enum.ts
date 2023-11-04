@@ -1,0 +1,27 @@
+export enum Cities {
+    Tunis,
+    Ariana,
+    BenArous,
+    Manouba,
+    Nabeul,
+    Zaghouan,
+    Bizerte,
+    Beja,
+    Jendouba,
+    LeKef,
+    Siliana,
+    Sousse,
+    Monastir,
+    Mahdia,
+    Sfax,
+    Kairouan,
+    Kasserine,
+    SidiBouzid,
+    Gabes,
+    Medenine,
+    Tataouine,
+    Tozeur,
+    Gafsa,
+    Kebili
+  }
+  

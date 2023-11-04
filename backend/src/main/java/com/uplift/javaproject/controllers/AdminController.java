@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uplift.javaproject.models.Charity;
 import com.uplift.javaproject.models.enums.CharityStatus;
 import com.uplift.javaproject.services.CharityService;
-import com.uplift.javaproject.services.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
