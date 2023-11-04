@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponentComponent } from './test-component/test-component.component';
 import { NavComponent } from './components/nav/nav.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TestComponentComponent,
-    NavComponent
+    NavComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
