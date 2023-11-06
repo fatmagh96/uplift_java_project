@@ -19,6 +19,7 @@ export class UserDashboardComponent {
 
   ngOnInit(): void {
     this.onGetLoggedUser();
+    // this.onGetUserById();
   }
   
   onGetUsers(): void {
@@ -32,7 +33,22 @@ export class UserDashboardComponent {
 
   onGetLoggedUser(): void {
     this.userService.getLoggedUser().subscribe(
-      (response) => console.log(response),
+      (response) => {
+        console.log("response==>",response);
+        this.user = response;
+      },
+      (error) => console.log(error),
+      () => console.log("Done getting users")
+      )
+  }
+
+  onGetUserById(): void {
+    const id = sessionStorage.getItem("user_id");
+    this.userService.getUserById(Number(id)).subscribe(
+      (response) => {
+        console.log(response);
+        this.user = response;
+      },
       (error) => console.log(error),
       () => console.log("Done getting users")
       )

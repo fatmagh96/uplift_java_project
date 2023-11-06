@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit{
 
 
   user: User = new User();
+  loginUser: User = new User();
   
   constructor(
     private userService: UserService, 
@@ -28,6 +29,21 @@ export class RegisterComponent implements OnInit{
     this.userService.registerUser(this.user).subscribe(
       (response) =>{
         console.log(response);
+        sessionStorage.setItem('user_id', String(response.id))
+        this.router.navigateByUrl("/dashboard");
+        // this.router.navigate();
+      } ,
+      (error) => console.log(error),
+      () => console.log("Done getting users")
+    );
+    console.log("form submitted", this.user);
+  }
+
+  onLogin(){
+    this.userService.loginUser(this.loginUser).subscribe(
+      (response) =>{
+        console.log(response);
+        sessionStorage.setItem('user_id', String(response.id))
         this.router.navigateByUrl("/dashboard");
         // this.router.navigate();
       } ,

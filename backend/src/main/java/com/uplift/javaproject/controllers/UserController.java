@@ -25,7 +25,7 @@ import com.uplift.javaproject.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -61,7 +61,12 @@ public class UserController {
 		}
 		User savedUser = userServ.register(user, result);
 //        return ResponseEntity.ok("User registered successfully!");
+		System.out.println("the saved user is "+savedUser.getId());
+	
+		
+		
 		session.setAttribute("user_id", savedUser.getId());
+//		System.out.println("the User id is : "+session.getAttribute("user_id"));
 		return new ResponseEntity<>(savedUser, HttpStatus.OK);
 	}
 
@@ -90,11 +95,15 @@ public class UserController {
 		}
 	}
 
+	// GET LOGGED USER
 	@GetMapping("/loggedUser")
 	public User getLogged(HttpSession session) {
 		Long id = (Long) session.getAttribute("user_id");
+		System.out.println("USER ID FROM SESSION "+id);
 		return userServ.findUserById(id);
 	}
+
+
 
 	
 	// Update User

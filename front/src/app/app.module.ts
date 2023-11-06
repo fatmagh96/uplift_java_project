@@ -9,6 +9,10 @@ import { CreateCharityComponent } from './components/create-charity/create-chari
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { HomeEventsComponent } from './components/home-events/home-events.component';
+import { CardComponent } from './components/card/card.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +20,10 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
     LandingPageComponent,
     RegisterComponent,
     CreateCharityComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    HomeEventsComponent,
+    CardComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
