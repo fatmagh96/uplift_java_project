@@ -1,0 +1,41 @@
+.viewbutton {
+    border-radius: 8px;
+    // display: inline-block;
+    padding: 9px 18px;
+    border: 0;
+    font-size: 1rem;
+    cursor: pointer;
+    background: #49516f;
+    color: #fff;
+    text-decoration: none;
+    
+}
+
+.category-pill {
+    // font-family: sofia-pro;
+    font-style: normal;
+    font-weight: 400;
+    text-decoration: none;
+    // position: absolute;
+    // bottom: 18px;
+    padding: 5px 10px;
+    color: #49516f;
+    border-radius: 8px;
+    background-color: #f2f3f7;
+}
+
+
+.card {
+    // width: 200px;
+    height: 400px;
+    // background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    cursor: pointer; /* You can change the cursor style here */
+  }

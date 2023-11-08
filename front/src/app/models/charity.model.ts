@@ -15,9 +15,9 @@ export class Charity {
     createdAt?: Date;
     updatedAt?: Date;
     founder?: User;
-    address?: Address;
-    followers?: User[];
-    categories?: Category[];
+    // address?: Address = new Address();
+    // followers?: User[];
+    // categories?: Category[];
 
 }
 

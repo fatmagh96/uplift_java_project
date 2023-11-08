@@ -7,11 +7,16 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { RegisterComponent } from './components/register/register.component';
 import { CreateCharityComponent } from './components/create-charity/create-charity.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { HomeEventsComponent } from './components/home-events/home-events.component';
 import { CardComponent } from './components/card/card.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeCharitiesComponent } from './components/home-charities/home-charities.component';
+import { HomepageComponent } from './views/homepage/homepage.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { GoalsComponent } from './components/goals/goals.component';
 
 
 @NgModule({
@@ -24,12 +29,18 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HomeEventsComponent,
     CardComponent,
     NavbarComponent,
+    HomeCharitiesComponent,
+    HomepageComponent,
+    HeaderComponent,
+    FooterComponent,
+    GoalsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
