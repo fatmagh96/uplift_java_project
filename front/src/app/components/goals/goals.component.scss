@@ -4,6 +4,8 @@
   .showcase .showcase-img {
     min-height: 30rem;
     background-size: cover;
+    background-repeat: no-repeat;
+    // height: 100%;
   }
   @media (min-width: 768px) {
     .showcase .showcase-text {

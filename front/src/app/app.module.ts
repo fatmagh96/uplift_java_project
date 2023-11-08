@@ -17,6 +17,8 @@ import { HomepageComponent } from './views/homepage/homepage.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GoalsComponent } from './components/goals/goals.component';
+import { CharitiesComponent } from './views/charities/charities.component';
+import { CharitiesHeaderComponent } from './components/charities/charities-header/charities-header.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { GoalsComponent } from './components/goals/goals.component';
     HeaderComponent,
     FooterComponent,
     GoalsComponent,
+    CharitiesComponent,
+    CharitiesHeaderComponent,
   ],
   imports: [
     BrowserModule,

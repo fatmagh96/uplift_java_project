@@ -2,7 +2,9 @@
 
 $font-family: 'Roboto', sans-serif;
 $font-size-base: 0.925rem;
-$base-color: #66f;
+
+// $base-color: #66f;
+$base-color:#3d4b82;
 $text-dark: #3c4250;
 $border-color: #eceef3;
 
@@ -39,6 +41,10 @@ body {
 
 a {
   text-decoration: none;
+}
+
+nav a{
+  font-size: larger;
 }
 
 .container {

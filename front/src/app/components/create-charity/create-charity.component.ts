@@ -126,12 +126,12 @@ export class CreateCharityComponent  {
         "city": charityData.city,  // Replace with the actual city name
         "zipCode": charityData.zipCode
       },
-      "categories": [
-        {
-          "categoryName": charityData.categoryName
-        }
-    ]
-
+      // "categories": [
+      //   {
+      //     "categoryName": charityData.categoryName
+      //   }
+      // ]
+      "categories": charityData.categoryName?.map((category: any)=>({"categoryName":category}))
       // "categories": charityData.categories.map((categoryName: any) => ({ "categoryName":categoryName }))
       // "categories": charityData.categories ? charityData.categories.map((categoryName: any) => ({ "categoryName": categoryName})) : []
   }
