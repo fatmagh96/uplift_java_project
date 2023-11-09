@@ -17,4 +17,8 @@ export class CharityService {
     // const headers = new HttpHeaders().set('Content-Type', 'application/json');        
     return this.http.post<any>(`http://localhost:8080/api/charities/new`, charity, {withCredentials: true});
   }
+
+  getAllCharities(): Observable<Charity[]> {
+    return this.http.get<Charity[]>(baseUrl);
+  }
 }

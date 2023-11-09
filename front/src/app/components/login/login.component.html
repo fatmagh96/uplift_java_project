@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <app-navbar></app-navbar>
+  <div id="login-box">
+    <div class="left">
+      <h1>Sign up</h1>
+      <form (ngSubmit)="submit()">
+  
+        <input type="text" name="firstName" id="firstName" [(ngModel)]="user.firstName" required placeholder="First Name" />
+        <input type="text" name="lastName" id="lastName" [(ngModel)]="user.lastName" required  placeholder="Last Name" />
+        <input type="text" name="email" id="email" [(ngModel)]="user.email" required placeholder="E-mail" />
+        <input type="password" name="password" id="password" [(ngModel)]="user.password" required placeholder="Password" />
+        <input type="password" name="password2" id="confirm" [(ngModel)]="user.confirm" required placeholder="Retype password" />
+        
+        <input type="submit" name="signup_submit" value="Sign me up" />
+      </form>
+    </div>
+    
+    <div class="right">
+      <h1>Log In</h1>
+      <form (ngSubmit)="onLogin()">
+  
+        <input type="text" name="email" id="email1" [(ngModel)]="loginUser.email" required placeholder="E-mail" />
+        <input type="password" name="password" id="password1" [(ngModel)]="loginUser.password" required placeholder="Password" />
+    
+        <input type="submit" name="signup_submit" value="Log In" />
+      </form>
+  
+      <!-- <div>
+        <span class="loginwith">Sign in with<br />social network</span>
+        <button class="social-signin facebook">Log in with facebook</button>
+        <button class="social-signin twitter">Log in with Twitter</button>
+        <button class="social-signin google">Log in with Google+</button>
+      </div>
+      -->
+    </div>
+    <div class="or">OR</div>
+  </div>
+  <app-footer></app-footer>
+</body>
+</html>
+

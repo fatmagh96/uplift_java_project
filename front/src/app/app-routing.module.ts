@@ -6,6 +6,7 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
 import { HomepageComponent } from './views/homepage/homepage.component';
 import { CreateCharityComponent } from './components/create-charity/create-charity.component';
 import { CharitiesComponent } from './views/charities/charities.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {path:'', component: LandingPageComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:'dashboard', component: UserDashboardComponent},
   {path:'test', component: HomepageComponent},
   {path:'charities', component: CharitiesComponent},
-  {path:'createCharity', component: CreateCharityComponent}
+  {path:'createCharity', component: CreateCharityComponent},
+  {path:'login', component: LoginComponent}
 
 ];
 

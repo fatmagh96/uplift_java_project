@@ -19,6 +19,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { GoalsComponent } from './components/goals/goals.component';
 import { CharitiesComponent } from './views/charities/charities.component';
 import { CharitiesHeaderComponent } from './components/charities/charities-header/charities-header.component';
+import { LoginComponent } from './components/login/login.component';
+import { CharityCardComponent } from './components/charities/charity-card/charity-card.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { CharitiesHeaderComponent } from './components/charities/charities-heade
     GoalsComponent,
     CharitiesComponent,
     CharitiesHeaderComponent,
+    LoginComponent,
+    CharityCardComponent,
   ],
   imports: [
     BrowserModule,

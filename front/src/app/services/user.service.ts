@@ -35,6 +35,8 @@ export class UserService {
     return this.http.get<User>("http://localhost:8080/api/loggedUser", {withCredentials: true});
   }
 
-
+  logoutUser(): any {
+    return this.http.get<any>("http://localhost:8080/api/logout", {withCredentials: true});
+  }
 
 }

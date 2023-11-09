@@ -1,6 +1,8 @@
 package com.uplift.javaproject.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -186,11 +188,13 @@ public class UserController {
 	
 	
 	// LOGOUT
-	@GetMapping("/logout")
-	public ResponseEntity<?> logout(HttpSession session) {
-		session.invalidate();
-		return ResponseEntity.ok("User logged out successfully!");
-	}
+    @GetMapping("/logout")
+    public ResponseEntity<Map<String, String>> logout(HttpSession session) {
+        session.invalidate();
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "User logged out successfully!");
+        return ResponseEntity.ok(response);
+    }
 	
 	
 	// BAN a user

@@ -73,7 +73,7 @@ public class Charity {
 	private User founder;
 
 	// 1:1 Address Relation Charity ------------------------
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private Address address;
@@ -87,7 +87,7 @@ public class Charity {
 	private List<User> followers;
 
 	// M:M Charity to Category
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "charities_categories", joinColumns = @JoinColumn(name = "charity_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
