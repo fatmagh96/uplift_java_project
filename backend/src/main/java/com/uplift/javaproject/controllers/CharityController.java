@@ -22,6 +22,7 @@ import com.uplift.javaproject.models.Category;
 import com.uplift.javaproject.models.Charity;
 import com.uplift.javaproject.models.CharityAndAddressAndCategoriesRequest;
 import com.uplift.javaproject.models.User;
+import com.uplift.javaproject.models.enums.Categories;
 import com.uplift.javaproject.repositories.RoleRepository;
 import com.uplift.javaproject.services.AddressService;
 import com.uplift.javaproject.services.CategoryService;
@@ -61,6 +62,13 @@ public class CharityController {
 	@GetMapping("/charities/test")
 	public List<Charity> getAll() {
 		return charityServ.allCharities();
+	}
+	
+	@GetMapping("/charities/{categoryName}")
+	public List<Charity> getAllByCategory(@PathVariable Categories categoryName) {
+		Category c = categoryServ.findByCategoryName(categoryName);
+		System.out.println(charityServ.allCharitiesByCategory(c));
+		return charityServ.allCharitiesByCategory(c);
 	}
 
 

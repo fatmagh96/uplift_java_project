@@ -8,5 +8,5 @@ import { Charity } from 'src/app/models/charity.model';
 })
 export class CharityCardComponent {
 
-  @Input() charityData!: Charity[];
+  @Input() charityData!: Charity;
 }

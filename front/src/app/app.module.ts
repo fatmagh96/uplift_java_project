@@ -21,6 +21,8 @@ import { CharitiesComponent } from './views/charities/charities.component';
 import { CharitiesHeaderComponent } from './components/charities/charities-header/charities-header.component';
 import { LoginComponent } from './components/login/login.component';
 import { CharityCardComponent } from './components/charities/charity-card/charity-card.component';
+import { CharityPageComponent } from './views/charity-page/charity-page.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -42,13 +44,15 @@ import { CharityCardComponent } from './components/charities/charity-card/charit
     CharitiesHeaderComponent,
     LoginComponent,
     CharityCardComponent,
+    CharityPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

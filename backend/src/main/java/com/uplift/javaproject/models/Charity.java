@@ -42,6 +42,7 @@ public class Charity {
 	private Long id;
 
 	@NotEmpty(message = "Name is required!")
+	@Column(unique=true)
 	private String name;
 	@NotEmpty(message = "rib is required!")
 	private String rib;

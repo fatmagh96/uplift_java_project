@@ -7,6 +7,7 @@ import { HomepageComponent } from './views/homepage/homepage.component';
 import { CreateCharityComponent } from './components/create-charity/create-charity.component';
 import { CharitiesComponent } from './views/charities/charities.component';
 import { LoginComponent } from './components/login/login.component';
+import { CharityPageComponent } from './views/charity-page/charity-page.component';
 
 const routes: Routes = [
   {path:'', component: LandingPageComponent},
@@ -15,8 +16,8 @@ const routes: Routes = [
   {path:'test', component: HomepageComponent},
   {path:'charities', component: CharitiesComponent},
   {path:'createCharity', component: CreateCharityComponent},
-  {path:'login', component: LoginComponent}
-
+  {path:'login', component: LoginComponent},
+  {path:'charitypage', component: CharityPageComponent},
 ];
 
 @NgModule({

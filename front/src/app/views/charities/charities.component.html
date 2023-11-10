@@ -2,41 +2,40 @@
 <app-charities-header></app-charities-header>
 
 <div class="filter-header d-flex justify-content-around mt-5">
-    <div class="d-flex justify-content-between gap-4 ">
-   
-        <div class="">
+  <div class="d-flex justify-content-between gap-4 ">
 
-            <select class="form-select form-select-lg mb-3" aria-label="Large select example">
-                <option selected>All Categories</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            
-        </div>
-        <div class="">
+    <div class="">
+      <form action="">
+        <select class="form-select form-select-lg mb-3" aria-label="Large select example" (change)="filterByCategory($event)" >
+          <option selected disabled>All Categories</option>
+          <option *ngFor="let category of causeTypes" [value]="category">{{category}}</option>
+        </select>
+      </form>
 
-            <select class="form-select form-select-lg mb-3" aria-label="Large select example">
-                <option selected>All Cities</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            
-        </div>
-         
+    </div>
+    <div class="">
+      <form action="">
+        <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+          <option selected disabled>All Cities</option>
+          <option *ngFor="let city of cities" [value]="city">{{city}}</option>  
+        </select>
+      </form>
+
     </div>
 
-    <div class="search-box">
-        <form class="search-container">
-            <input type="text" id="search-bar" placeholder="Look for Charity...">
-            <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
-          </form>
-    </div>
+  </div>
+
+  <div class="search-box">
+    <form class="search-container">
+      <input type="text" id="search-bar" placeholder="Look for Charity...">
+      <a href="#"><img class="search-icon"
+          src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+    </form>
+  </div>
 </div>
 
 <div class="container mt-4  p-4  d-flex flex-column  align-items-center  " style="min-height: 900px;">
-    <div class="card mb-4" style="max-width: 900px;">
+  <!-- <div class="card mb-4" style="max-width: 900px;">
         <div class="row g-3">
           <div class="col-md-4">
             <img src="../../../assets/img/testimonials-1.jpg" class="img-fluid rounded-start" alt="...">
@@ -86,5 +85,18 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
+
+  <app-charity-card *ngFor="let charity of charities | paginate
+      : {
+          itemsPerPage: tableSize,
+          currentPage: page,
+          totalItems: count
+        };
+  let i = index
+" [charityData]="charity"></app-charity-card>
+  <div class="d-flex justify-content-center">
+    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+    </pagination-controls>
+  </div>
 </div>
