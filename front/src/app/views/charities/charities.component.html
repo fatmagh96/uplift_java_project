@@ -7,7 +7,7 @@
     <div class="">
       <form action="">
         <select class="form-select form-select-lg mb-3" aria-label="Large select example" (change)="filterByCategory($event)" >
-          <option selected disabled>All Categories</option>
+          <option selected value="all">All Categories</option>
           <option *ngFor="let category of causeTypes" [value]="category">{{category}}</option>
         </select>
       </form>
@@ -15,8 +15,8 @@
     </div>
     <div class="">
       <form action="">
-        <select class="form-select form-select-lg mb-3" aria-label="Large select example">
-          <option selected disabled>All Cities</option>
+        <select class="form-select form-select-lg mb-3" aria-label="Large select example" (change)="filterByCity($event)">
+          <option selected value="all">All Cities</option>
           <option *ngFor="let city of cities" [value]="city">{{city}}</option>  
         </select>
       </form>
@@ -26,11 +26,11 @@
   </div>
 
   <div class="search-box">
-    <form class="search-container">
-      <input type="text" id="search-bar" placeholder="Look for Charity...">
+    <div class="search-container">
+      <input type="text" id="search-bar" [(ngModel)]="filterText" (input)="filterData()" placeholder="Look for Charity...">
       <a href="#"><img class="search-icon"
           src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
-    </form>
+    </div>
   </div>
 </div>
 
@@ -87,7 +87,7 @@
         </div>
       </div> -->
 
-  <app-charity-card *ngFor="let charity of charities | paginate
+  <app-charity-card *ngFor="let charity of filteredCharities | paginate
       : {
           itemsPerPage: tableSize,
           currentPage: page,

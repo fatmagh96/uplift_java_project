@@ -64,8 +64,13 @@ public class CharityController {
 		return charityServ.allCharities();
 	}
 	
-	@GetMapping("/charities/{categoryName}")
-	public List<Charity> getAllByCategory(@PathVariable Categories categoryName) {
+	@GetMapping("/charities/{categoryString}")
+	public List<Charity> getAllByCategory(@PathVariable String categoryString) {
+//		System.out.println(categoryString);
+		if(categoryString.equals("all")) { 
+			return charityServ.allCharities();
+		}
+		Categories categoryName = Categories.valueOf(categoryString);
 		Category c = categoryServ.findByCategoryName(categoryName);
 		System.out.println(charityServ.allCharitiesByCategory(c));
 		return charityServ.allCharitiesByCategory(c);
