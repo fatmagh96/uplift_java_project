@@ -1,5 +1,9 @@
 package com.uplift.javaproject.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,18 +19,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.uplift.javaproject.models.Address;
 import com.uplift.javaproject.models.Category;
 import com.uplift.javaproject.models.Charity;
 import com.uplift.javaproject.models.CharityAndAddressAndCategoriesRequest;
+import com.uplift.javaproject.models.File;
 import com.uplift.javaproject.models.User;
 import com.uplift.javaproject.models.enums.Categories;
 import com.uplift.javaproject.repositories.RoleRepository;
 import com.uplift.javaproject.services.AddressService;
 import com.uplift.javaproject.services.CategoryService;
 import com.uplift.javaproject.services.CharityService;
+import com.uplift.javaproject.services.FileService;
 import com.uplift.javaproject.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -53,6 +61,11 @@ public class CharityController {
 
 	@Autowired
 	private RoleRepository roleRep;
+	
+	@Autowired
+	private FileService fileService;
+	
+	public static String uploadDirectory = System.getProperty("user.dir") + "/uploads";
 
 	@GetMapping("/charities")
 	public ResponseEntity<Object> allCharities() {
@@ -78,9 +91,13 @@ public class CharityController {
 
 
 	@PostMapping("/charities/new")
-	public ResponseEntity<Object> createCharity(@Valid @RequestBody CharityAndAddressAndCategoriesRequest request,
-			BindingResult result, HttpSession session) {
+	public ResponseEntity<Object> createCharity(@Valid @RequestPart CharityAndAddressAndCategoriesRequest request,
+			BindingResult result,@RequestPart("files") MultipartFile[] files, HttpSession session) throws IOException {
 		// Check for validation errors
+		
+		
+		
+		
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
 			return ResponseEntity.status(400).body(result.getAllErrors());
@@ -116,6 +133,21 @@ public class CharityController {
 
 		// Save the Charity instance using your service
 		Charity savedCharity = charityServ.createCharity(charity);
+		
+		for (MultipartFile file : files) {
+			if (!file.isEmpty()) {
+				String filename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+				Path path = Paths.get(uploadDirectory);
+				Files.copy(file.getInputStream(), path.resolve(filename));
+
+				// Create and save file metadata
+				File newFile = new File();
+				newFile.setPath(filename);
+				newFile.setCharity(savedCharity);
+				fileService.createFile(newFile);
+			}
+		}
+
 
 		return new ResponseEntity<>(savedCharity, HttpStatus.OK);
 	}

@@ -3,6 +3,6 @@ import { Categories } from "./enums/categories.enum";
 
 export class Category {
     id?: number;
-    categoryName?: Categories;
+    categoryName?: string;
     charities?: Charity[];
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CharityDto } from 'src/app/models/CharityDto.model';
 import { Address } from 'src/app/models/address.model';
 import { Category } from 'src/app/models/category.model';
 import { Charity } from 'src/app/models/charity.model';
 import { Categories } from 'src/app/models/enums/categories.enum';
+import { Cities } from 'src/app/models/enums/cities.enum';
 import { CharityService } from 'src/app/services/charity.service';
 
 @Component({
@@ -11,15 +13,21 @@ import { CharityService } from 'src/app/services/charity.service';
   templateUrl: './create-charity.component.html',
   styleUrls: ['./create-charity.component.scss']
 })
-export class CreateCharityComponent  {
-  // charityForm!: FormGroup;
-  // categoriesEnum =  Categories;
-  charityForm: Charity = new Charity();
+export class CreateCharityComponent implements OnInit {
+
+
+  currentStep: number = 1;
+  dto: CharityDto = new CharityDto();
+  charity: Charity = new Charity();
   address: Address = new Address();
   category: Category = new Category();
+  selectedCategories: string[] = [];
 
-  jsonData!: string;
 
+  selectedFiles: File[] = [];
+
+  dropdownSettings = {};
+  yearOptions: number[] = [];
 
   causeTypes: string[] = [
     'HEALTHCARE',
@@ -41,142 +49,116 @@ export class CreateCharityComponent  {
     'LGBTQ_RIGHTS'
   ];
 
-  constructor(private charityService: CharityService ) { 
-    this.jsonData= JSON.stringify({"charity":this.charityForm,"address":this.address,"categories":[this.category]});
-  }
-  
+  citiesList: string[] = Object.keys(Cities).filter(k => typeof Cities[k as any] === 'number')
 
-  // ngOnInit(): void {
-  //   this.charityForm = this.fb.group({
-  //     name: ['', Validators.required],
-  //     rib: ['', Validators.required],
-  //     phone: ['', Validators.required],
-  //     description: ['', Validators.required],
-  //     logo: [''],
-  //     foundationYear: ['', Validators.required],
-  //     numJort: ['', Validators.required],
-  //     // status: ['', Validators.required],
-  //     // founder: ['', Validators.required],
-  //     address: this.fb.group({
-  //       // Define address fields here
-  //       street: [''],
-  //       city: [''],
-  //       // Add more fields as needed
-  //     }),
-  //     categories: this.fb.array([]), // Assuming categories is an array
-  //   });
-  // }
-
-  // onSubmit() {
-  //   if (this.charityForm.valid) {
-  //     const newCharity: Charity = this.charityForm.value as Charity;
-  //     // Perform logic to save the charity data, e.g., send to a backend service
-  //     console.log(newCharity);
-  //   }
-  // }
+  ngOnInit(): void {
 
 
-  //   // Helper method to get enum keys
-  //   getEnumKeys(enumObj: any): string[] {
-  //     return Object.keys(enumObj).filter(key => isNaN(Number(enumObj[key])));
-  //   }
 
-  // onCreate(){
-  //   console.log(this.charityForm);
-  //   console.log(this.address);
-  //   console.log(this.category);
-
-  //   console.log("big json:", {"charity":this.charityForm,"address":this.address,"categories":[this.category]});
-    
-  //   const data = {"charity":this.charityForm,"address":this.address,"categories":[this.category]};
-    
-  //   this.charityService.createCharity(data).subscribe(
-
-  //     (response) =>{
-  //       console.log(response);
-  //       // sessionStorage.setItem('user_id', String(response.id))
-        
-  //       // this.router.navigate();
-  //     } ,
-  //     (error) => console.log(error),
-  //     () => console.log("Done creating charity")
-
-  //   );
-
-  // }
-
-  onCreate(charityData: any){
-
-    console.log(charityData);
-
-    console.log(charityData.city);
-    
-    const json = {
-      "charity": {
-        "name": charityData.name,
-        "rib": charityData.rib,
-        "phone": charityData.phone,
-        "description": charityData.description,
-        "logo": charityData.logo,
-        "foundationYear": charityData.foundationYear,
-        "numJort": charityData.numJort,
-      },
-      "address": {
-        "street": charityData.street,
-        "city": charityData.city,  // Replace with the actual city name
-        "zipCode": charityData.zipCode
-      },
-      // "categories": [
-      //   {
-      //     "categoryName": charityData.categoryName
-      //   }
-      // ]
-      "categories": charityData.categoryName?.map((category: any)=>({"categoryName":category}))
-      // "categories": charityData.categories.map((categoryName: any) => ({ "categoryName":categoryName }))
-      // "categories": charityData.categories ? charityData.categories.map((categoryName: any) => ({ "categoryName": categoryName})) : []
-  }
-  console.log(json);
-  
-  const postman = {
-    "charity": {
-      "name": "new 16 Charity",
-      "rib": "123456789",
-      "phone": "555-1234",
-      "description": "A test charity",
-      "logo": "charity_logo.png",
-      "foundationYear": 2020,
-      "numJort": "ABC123",
-      "status": "PENDING"
-    },
-    "address": {
-      "street": "123 Main St",
-      "city": "Sousse",  // Replace with the actual city name
-      "zipCode": "12345"
-    },
-    "categories": [
-      {
-        "categoryName": "POVERTY_ALLEVIATION"
-      },
-      {
-        "categoryName": "DISASTER_RELIEF"
-      }
-      // Add more categories as needed
-    ]
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      limitSelection: 2
+    };
   }
 
-    
-    this.charityService.createCharity(json).subscribe(
+  constructor(private charityService: CharityService) {
+    const currentYear = new Date().getFullYear();
+    for (let year = currentYear; year >= currentYear - 50; year--) {
+      this.yearOptions.push(year);
+    }
+  }
 
-      (response) =>{
+  createCharity() {
+
+    this.dto.charity = this.charity;
+    this.dto.address = this.address;
+    for (let index = 0; index < this.selectedCategories.length; index++) {
+      const element = this.selectedCategories[index];
+      let newCategory :Category = new Category();
+      newCategory.categoryName = element;
+      this.dto.categories?.push(newCategory);
+    }
+
+    console.log("DTO: ",this.dto);
+
+
+    // this.charityService.createCharity(this.dto).subscribe(
+
+    //   (response) =>{
+    //     console.log(response);
+    //   } ,
+    //   (error) => {console.log(error)
+    //   this.dto.categories = []
+    //   },
+    //   () => console.log("Success creating charity")
+
+    // );
+
+    const formData: FormData = new FormData();
+
+    // // Add charity and address data
+    // formData.append('charity', JSON.stringify(this.charity));
+    // formData.append('address', JSON.stringify(this.address));
+
+    // // Add categories data
+    // for (let index = 0; index < this.selectedCategories.length; index++) {
+    //   const element = this.selectedCategories[index];
+    //   let newCategory: Category = new Category();
+    //   newCategory.categoryName = element;
+    //   formData.append('categories[]', JSON.stringify(newCategory));
+    // }
+
+    // Add files
+    // Add logo file
+    if (this.selectedFiles.length > 0) {
+      formData.append('files', this.selectedFiles[0]);
+    }
+    formData.append("request",new Blob([JSON.stringify(this.dto)], {type: 'application/json'}))
+    console.log(formData);
+
+    // Call the service with FormData
+    this.charityService.createCharity(formData).subscribe(
+      (response) => {
         console.log(response);
-        // sessionStorage.setItem('user_id', String(response.id))
-        
-        // this.router.navigate();
-      } ,
-      (error) => console.log(error),
-      () => console.log("Done creating charity")
-
+      },
+      (error) => {
+        console.log(error);
+        this.dto.categories = [];
+      },
+      () => console.log('Success creating charity')
     );
+  }
 
+  nextStep() {
+    console.log('Moving to next step...');
+    // Increment the current step if it's less than 3
+    if (this.currentStep < 3) {
+      this.currentStep++;
+    }
+    console.log('Current Step:', this.currentStep);
+  }
+
+  previousStep() {
+    console.log('Moving to previous step...');
+    // Decrement the current step if it's greater than 1
+    if (this.currentStep > 1) {
+      this.currentStep--;
+    }
+    console.log('Current Step:', this.currentStep);
+  }
+
+
+  onFilesSelected(event: any): void {
+    const files: FileList = event.target.files;
+    if (files) {
+      this.selectedFiles = Array.from(files);
+      // Convert FileList to an array
+    }
   }
 }

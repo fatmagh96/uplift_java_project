@@ -1,0 +1,102 @@
+<div class="d-flex no-gutters">
+
+
+<div class="side-bar main-menu">
+    <ul class="d-flex flex-column gap-2 mt-3 ">
+        <!-- <li>
+            <a href="https://jbfarrow.com">
+                <i class="fa fa-home fa-2x"></i>
+                <span class="nav-text">
+                   Community Dashboard
+                </span>
+            </a>
+          
+        </li> -->
+        <li class="has-subnav">
+            <a [routerLink]="['profile']">
+               <i class="fa fa-user fa-2x"></i>
+                <span class="nav-text">
+                    Profile Settings
+                </span>
+            </a>
+           
+        </li>
+        <li class="has-subnav">
+            <a [routerLink]="['charities']">
+                <!-- <i class="fa fa-star fa-2x"></i> -->
+                <i class="fa-solid fa-hand-holding-hand fa fa-2x" style="color: #ffffff;"></i>
+                <span class="nav-text">
+                    Saved Charities
+                </span>
+            </a>
+            
+        </li>
+        <!-- <li class="has-subnav">
+            <a href="#">
+               <i class="fa fa-comments fa-2x"></i>
+                <span class="nav-text">
+                    Group Hub Forums
+                </span>
+            </a>
+            
+        </li> -->
+        
+        <li>
+            <a [routerLink]="['events']">
+                <i class="fa fa-calendar-days fa-2x"></i>
+                <span class="nav-text">
+                    Events
+                </span>
+            </a>
+        </li>
+        <!-- <li>
+            <a href="#">
+                <i class="fa fa-book fa-2x"></i>
+                <span class="nav-text">
+                   Surveying Jobs
+                </span>
+            </a>
+        </li> -->
+        <!-- <li>
+           <a href="#">
+               <i class="fa fa-cogs fa-2x"></i>
+                <span class="nav-text">
+                    Tools & Resources
+                </span>
+            </a>
+        </li> -->
+        <!-- <li>
+           <a href="#">
+                <i class="fa fa-map-marker fa-2x"></i>
+                <span class="nav-text">
+                    Member Map
+                </span>
+            </a>
+        </li> -->
+        <li>
+            <a [routerLink]="['donations']">
+                <i class="fa-solid fa-hand-holding-dollar fa fa-2x" style="color: #ffffff;"></i>
+                <span class="nav-text">
+                    Donation History
+                </span>
+            </a>
+        </li>
+        
+    </ul>
+
+    <ul class="logout">
+        <li>
+           <a href="" (click)="logout()">
+                 <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text">
+                    Logout
+                </span>
+            </a>
+        </li>  
+    </ul>
+</div>
+<div class="area p-5 bg-light ">
+    <router-outlet></router-outlet>
+</div>
+
+</div>

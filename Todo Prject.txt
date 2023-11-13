@@ -21,14 +21,8 @@ user Ban ??
 FRONT ************************************
 
 
-Nav
-<
-Landing Page
-log reg
 
->
-
-
+VALIDATION
 
 
 

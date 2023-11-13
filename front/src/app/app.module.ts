@@ -8,7 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { CreateCharityComponent } from './components/create-charity/create-charity.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { UserDashboardComponent } from './components/user-dashboard-2/user-dashboard.component';
 import { HomeEventsComponent } from './components/home-events/home-events.component';
 import { CardComponent } from './components/card/card.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -23,7 +23,13 @@ import { LoginComponent } from './components/login/login.component';
 import { CharityCardComponent } from './components/charities/charity-card/charity-card.component';
 import { CharityPageComponent } from './views/charity-page/charity-page.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { DashboardUserComponent } from './views/dashboard-user/dashboard-user.component';
+import { ProfileInfoComponent } from './components/userDashboard/profile-info/profile-info.component';
+import { SavedCharitiesComponent } from './components/userDashboard/saved-charities/saved-charities.component';
+import { EventsComponent } from './components/userDashboard/events/events.component';
+import { DonationHistoryComponent } from './components/userDashboard/donation-history/donation-history.component';
+import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -45,6 +51,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
     LoginComponent,
     CharityCardComponent,
     CharityPageComponent,
+    DashboardUserComponent,
+    ProfileInfoComponent,
+    SavedCharitiesComponent,
+    EventsComponent,
+    DonationHistoryComponent,
+    MultiSelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +64,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

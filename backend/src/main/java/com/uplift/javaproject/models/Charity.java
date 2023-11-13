@@ -50,8 +50,10 @@ public class Charity {
 	private String phone;
 	@NotEmpty(message = "description is required!")
 	private String description;
-	@NotEmpty(message = "logo is required!")
+	
+	
 	private String logo;
+	
 	@NotNull(message = "foundationYear is required!")
 	private int foundationYear;
 	@NotEmpty(message = "numJort is required!")
@@ -102,6 +104,12 @@ public class Charity {
 	@JsonIgnore
 	@OneToMany(mappedBy = "recipient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Donation> donationsReceived;
+	
+	
+	// upload photos(product can have many photos) unique to one product
+		@JsonIgnore
+		@OneToMany(mappedBy="charity", fetch = FetchType.LAZY)
+		private List<File> files;
 
 	// Empty constructor
 	public Charity() {
@@ -231,5 +239,23 @@ public class Charity {
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
+
+	public List<Donation> getDonationsReceived() {
+		return donationsReceived;
+	}
+
+	public void setDonationsReceived(List<Donation> donationsReceived) {
+		this.donationsReceived = donationsReceived;
+	}
+
+	public List<File> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<File> files) {
+		this.files = files;
+	}
+	
+	
 
 }

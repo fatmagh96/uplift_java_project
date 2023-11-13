@@ -1,212 +1,125 @@
-<!-- <h1>create-charity works!</h1>
+<!-- <app-navbar></app-navbar> -->
 
-<form [formGroup]="charityForm" (ngSubmit)="onSubmit()">
-    <label for="name">Name:</label>
-    <input type="text" id="name" formControlName="name" required>
-  
-    <label for="rib">RIB:</label>
-    <input type="text" id="rib" formControlName="rib" required>
-  
-    <label for="phone">Phone:</label>
-    <input type="text" id="phone" formControlName="phone" required>
-  
-    <label for="description">Description:</label>
-    <textarea id="description" formControlName="description" required></textarea>
-  
-    <label for="logo">Logo:</label>
-    <input type="text" id="logo" formControlName="logo">
-  
-    <label for="foundationYear">Foundation Year:</label>
-    <input type="number" id="foundationYear" formControlName="foundationYear" required>
-  
-    <label for="numJort">Num Jort:</label>
-    <input type="text" id="numJort" formControlName="numJort" required>
-  
-    <label for="street">Street:</label>
-    <input type="text" id="street" formControlName="address.street">
-  
-    <label for="city">City:</label>
-    <input type="text" id="city" formControlName="address.city">
-  
-    Add form controls for followers and categories if they are arrays
-    <label for="categories">Categories:</label>
-    <select id="categories" formControlName="categories">
-      <option value="HEALTHCARE">Healthcare</option>
-      <option value="EDUCATION">Education</option>
-      <option value="POVERTY_ALLEVIATION">Poverty Alleviation</option>
-      <option value="ENVIRONMENT">Environment</option>
-      <option value="ANIMAL_WELFARE">Animal Welfare</option>
-      <option value="CHILD_WELFARE">Child Welfare</option>
-      <option value="DISASTER_RELIEF">Disaster Relief</option>
-      <option value="ARTS_AND_CULTURE">Arts and Culture</option>
-      <option value="HUMAN_RIGHTS">Human Rights</option>
-      <option value="COMMUNITY_DEVELOPMENT">Community Development</option>
-      <option value="ELDERLY_SUPPORT">Elderly Support</option>
-      <option value="FOOD_SECURITY">Food Security</option>
-      <option value="WOMEN_EMPOWERMENT">Women Empowerment</option>
-      <option value="YOUTH_PROGRAMS">Youth Programs</option>
-      <option value="HOUSING">Housing</option>
-      <option value="RELIGIOUS">Religious</option>
-      <option value="LGBTQ_RIGHTS">LGBTQ Rights</option>
-    </select>
-  
-  
-    <button type="submit" [disabled]="!charityForm.valid">Submit</button>
+<div class="container">
+  <h1>Charity Creation</h1>
+  <form>
+    <div [ngSwitch]="currentStep">
+      <div *ngSwitchCase="1">
+        <h2>Step 1: Charity Details</h2>
+        <div>
+          <label for="name">Charity Name:</label>
+          <input
+            type="text"
+            [(ngModel)]="charity.name"
+            name="name"
+            id="name"
+            required
+          />
+        </div>
+
+        <!-- <div class="my-2">
+          <label for="logo">Logo:</label>
+          <input [(ngModel)]="charity.logo" name="logo" />
+        </div> -->
+
+        <div class="my-2">
+            <label for="logo">Logo:</label>
+            <input type="file"  (change)="onFilesSelected($event)" name="logo" />
+          </div>
+
+        <div>
+          <label for="foundationYear">Foundation Year:</label>
+          <input list="years" [(ngModel)]="charity.foundationYear" name="foundationYear" />
+          <datalist id="years">
+            <option *ngFor="let year of yearOptions" [value]="year"></option>
+          </datalist>
+        </div>
+        
+
+        <div>
+          <label for="numJort">Num Jort:</label>
+          <input [(ngModel)]="charity.numJort" name="numJort" />
+        </div>
+
+        <div>
+          <label for="rib">RIB:</label>
+          <input type="text" [(ngModel)]="charity.rib" name="rib" />
+        </div>
+
+
+        <!-- Add other fields for Step 1 -->
+        <button (click)="nextStep()">Next</button>
+      </div>
+
+      <div *ngSwitchCase="2">
+        <h2>Step 2: Contact Details</h2>
+
+        <div>
+          <label for="phone">Phone:</label>
+          <input [(ngModel)]="charity.phone" name="phone" />
+        </div>
+
+        <div>
+          <label for="street">Street:</label>
+          <input [(ngModel)]="address.street" name="street" />
+        </div>
+
+        <!-- <div>
+          <label for="city">City:</label>
+          <input [(ngModel)]="address.city" name="city" />
+        </div> -->
+
+        <div>
+          <label for="city">City:</label>
+          <select [(ngModel)]="address.city" name="city">
+            <option *ngFor="let city of citiesList" [value]="city">{{ city }}</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="zipCode">Zip Code:</label>
+          <input [(ngModel)]="address.zipCode" name="zipCode" />
+        </div>
+
+        <!-- Add other fields for Step 2 -->
+        <button (click)="previousStep()">Previous</button>
+        <button (click)="nextStep()">Next</button>
+      </div>
+
+      <div *ngSwitchCase="3">
+        <h2>Step 3: Category</h2>
+        <!-- <div>
+          <label for="categoryName">Select Categories:</label>
+          <select name="categories" [(ngModel)]="selectedCategories" class="form-select" multiple required>
+            <option *ngFor="let cause of causeTypes" [value]="cause">
+              {{ cause }}
+            </option>
+          </select>
+        </div> -->
+
+        <div>
+          <ng-multiselect-dropdown
+            name="categories"
+            [placeholder]="'Select Categories'"
+            [data]="causeTypes"
+            [(ngModel)]="selectedCategories"
+            [settings]="dropdownSettings"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div>
+          <label for="description">Description:</label>
+          <textarea
+            [(ngModel)]="charity.description"
+            name="description"
+          ></textarea>
+        </div>
+
+        <!-- Add other fields for Step 3 -->
+        <button (click)="previousStep()">Previous</button>
+        <button (click)="createCharity()">Submit</button>
+      </div>
+    </div>
   </form>
-   -->
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <div class="container">
-        <h1 class="text-danger">charity creation</h1>
-        <form (ngSubmit)="onCreate()">
-            <div>
-                <label for="firstName">charity Name:</label>
-                <input type="text" name="firstName" id="firstName" [(ngModel)]="charityForm.name" required>
-            </div>
-
-            <div>
-                <label for="lastName">rib:</label>
-                <input type="text" name="lastName" id="lastName" [(ngModel)]="charityForm.rib" required>
-            </div>
-
-            <div>
-                <label for="email">phone:</label>
-                <input type="email" name="email" id="email" [(ngModel)]="charityForm.phone" required>
-            </div>
-
-            <div>
-                <label for="password">description:</label>
-                <input  name="password" id="password" [(ngModel)]="charityForm.description" required>
-            </div>
-
-            <div>
-                <label for="confirm">foundationYear:</label>
-                <input name="confirm" id="confirm" [(ngModel)]="charityForm.foundationYear" required>
-            </div>
-
-            <div>
-                <label for="confirm">num jort:</label>
-                <input name="confirm" id="confirm" [(ngModel)]="charityForm.numJort" required>
-            </div>
-
-            <div>
-                <label for="street">street:</label>
-                <input  name="street" id="street" [(ngModel)]="address.street" required>
-            </div>
-
-            <div>
-                <label for="city">city:</label>
-                <input name="city" id="city" [(ngModel)]="address.city" required>
-            </div>
-
-            <div>
-                <label for="confirm">zipCode:</label>
-                <input  name="confirm" id="confirm" [(ngModel)]="address.zipCode" required>
-            </div>
-
-            <div>
-                <label for="confirm">category:</label>
-                <input  name="confirm" id="confirm" [(ngModel)]="category.categoryName" required>
-            </div>
-
-            <input type="submit" value="Submit">
-        </form>
-        <hr />
-        
-       {{jsonData}}
-    </div>
-</body>
-
-</html> -->
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
-
-<body>
-    <div class="container">
-        <h1 class="text-danger">charity creation</h1>
-        <form #charityForm="ngForm" (ngSubmit)="onCreate(charityForm.value)">
-            <div>
-                <label for="firstName">charity Name:</label>
-                <input type="text" name="name" id="firstName" ngModel>
-            </div>
-
-            <div>
-                <label for="lastName">rib:</label>
-                <input type="text" name="rib" id="lastName" ngModel>
-            </div>
-
-            <div>
-                <label for="email">phone:</label>
-                <input type="email" name="phone" id="email" ngModel>
-            </div>
-
-            <div>
-                <label for="password">description:</label>
-                <input  name="description" id="password" ngModel>
-            </div>
-            <div>
-                <label for="password">logo:</label>
-                <input  name="logo" id="password" ngModel>
-            </div>
-            <div>
-                <label for="confirm">foundationYear:</label>
-                <input name="foundationYear" id="confirm" ngModel>
-            </div>
-
-            <div>
-                <label for="confirm">num jort:</label>
-                <input name="numJort" id="confirm" ngModel>
-            </div>
-
-            <div>
-                <label for="street">street:</label>
-                <input  name="street" id="street" ngModel>
-            </div>
-
-            <div>
-                <label for="city">city:</label>
-                <input name="city" id="city" ngModel>
-            </div>
-
-            <div>
-                <label for="confirm">zipCode:</label>
-                <input  name="zipCode" id="confirm" ngModel>
-            </div>
-
-            <!-- <div>
-                <label for="confirm">category:</label>
-                <input  name="categoryName" id="confirm" ngModel>
-            </div> -->
-
-            <label for="causeType">Select a Cause:</label>
-            <select id="causeType" name="categoryName" class="select" multiple data-mdb-placeholder="Example placeholder" multiple ngModel>
-            <option *ngFor="let cause of causeTypes" [value]="cause">{{ cause }}</option>
-            </select>
-
-
-            <input type="submit" value="Submit">
-        </form>
-        <hr />
-        
-       <!-- {{jsonData}} -->
-    </div>
-</body>
-
-</html>
+</div>

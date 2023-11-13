@@ -53,6 +53,8 @@
             ],
             "styles": [
               "src/styles.scss"
+         
+
             ],
             "scripts": []
           },
@@ -116,6 +118,7 @@
             ],
             "styles": [
               "src/styles.scss"
+              
             ],
             "scripts": []
           }
