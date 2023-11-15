@@ -39,4 +39,14 @@ export class UserService {
     return this.http.get<any>("http://localhost:8080/api/logout", {withCredentials: true});
   }
 
+  updateUser(user: User): Observable<User> {
+    // const headers = new HttpHeaders().set('Content-Type', 'application/json');        
+    return this.http.put<User>(`${baseUrl}/${user.id}`, user, {withCredentials: true});
+  }
+
+  changePassword(user: User): Observable<User> {
+    // const headers = new HttpHeaders().set('Content-Type', 'application/json');        
+    return this.http.put<User>(`${baseUrl}/changePassword`, user, {withCredentials: true});
+  }
+
 }

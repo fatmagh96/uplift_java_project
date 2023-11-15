@@ -1,5 +1,6 @@
 import { Address } from "./address.model";
 import { Category } from "./category.model";
+import { File } from "./file.model";
 import { User } from "./user.model";
 
 export class Charity {
@@ -18,6 +19,7 @@ export class Charity {
     address?: Address = new Address();
     followers?: User[];
     categories?: Category[];
+    files?: File[];
 
 }
 

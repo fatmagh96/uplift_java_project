@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CharityDto } from 'src/app/models/CharityDto.model';
 import { Address } from 'src/app/models/address.model';
@@ -11,7 +11,7 @@ import { CharityService } from 'src/app/services/charity.service';
 @Component({
   selector: 'app-create-charity',
   templateUrl: './create-charity.component.html',
-  styleUrls: ['./create-charity.component.scss']
+  styleUrls: ['./create-charity.component.scss'],
 })
 export class CreateCharityComponent implements OnInit {
 

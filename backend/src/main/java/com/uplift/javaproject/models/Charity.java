@@ -107,7 +107,7 @@ public class Charity {
 	
 	
 	// upload photos(product can have many photos) unique to one product
-		@JsonIgnore
+//		@JsonIgnore
 		@OneToMany(mappedBy="charity", fetch = FetchType.LAZY)
 		private List<File> files;
 

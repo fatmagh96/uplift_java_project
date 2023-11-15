@@ -9,4 +9,10 @@ import { Charity } from 'src/app/models/charity.model';
 export class CharityCardComponent {
 
   @Input() charityData!: Charity;
+
+
+  constructor(){
+    console.log("from card: ", this.charityData);
+    
+  }
 }

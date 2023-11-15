@@ -2,11 +2,37 @@
     <h1>Profile Settings</h1>
     <div>
         
-        <form action="">
-            <div>
+        <form (submit)="onSumbit()">
+            <div class="mb-3">
                 <label for="fname" class="form-label">First Name:</label>
-                <input type="text" id="fname" class="form-control w-50">
+                <input type="text" id="fname" class="form-control w-50" name="firstName" [(ngModel)]="user.firstName">
+            </div>
+
+            <div class="mb-3">
+                <label for="lname" class="form-label">Last Name:</label>
+                <input type="text" id="lname" name="lastName" class="form-control w-50"  [(ngModel)]="user.lastName">
+            </div>
+            <div class="d-flex mt-3  ">
+                <input type="submit" value="Save Changes" class="btn btn-success">
             </div>
         </form>
+
+        <div class="mt-4 ">
+            <h3>Change Password</h3>
+            <form action="">
+                <div class="mb-3">
+                    <label for="new_password" class="form-label">New Password:</label>
+                    <input type="password" id="new_password" class="form-control w-50">
+                </div>
     
+                <div class="mb-3">
+                    <label for="cpswrd" class="form-label">Confirm Password:</label>
+                    <input type="password" id="cpswrd" class="form-control w-50">
+                </div>
+                <div class="d-flex mt-3  ">
+                    <input type="submit" value="Change Password" class="btn btn-success">
+                </div>
+            </form>
+        </div>
+    </div>
    

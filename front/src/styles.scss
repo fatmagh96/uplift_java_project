@@ -1,3 +1,10 @@
 body {
     font-family: Poppins;
 }
+.multiselect-dropdown .selected-item {
+    -webkit-animation: .2s ease-in borderscale;
+    animation: .2s ease-in borderscale;
+    max-width: fit-content !important;
+
+
+    }
