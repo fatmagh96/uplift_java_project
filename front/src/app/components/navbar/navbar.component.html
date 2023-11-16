@@ -1,14 +1,50 @@
-
+<!-- 
 <header>
     <div style="height: 50px; background: #3d4b82" class="px-4 d-flex gap-3  justify-content-end align-items-center ">
         <a href="" class="btn btn-light px-2 py-1" style="color: rgb(37, 37, 123);">Add a Charity</a>
-        <!-- <a href="" class="btn btn-light px-2 py-1" style="color: rgb(37, 37, 123);">Sign in</a> -->
+      
         <a *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-light px-2 py-1" style="color: rgb(37, 37, 123);">Sign in</a>
         <a *ngIf="isLoggedIn" (click)="logout()" class="btn btn-light px-2 py-1" style="color: rgb(37, 37, 123);">Logout</a>
         
     </div>
+</header> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+<header>
+  <div style="height: 50px; background: #3d4b82" class="px-4 d-flex gap-3  justify-content-end align-items-center ">
+    
+      <div>
+        <a routerLink="/createCharity" class="btn btn-light px-2 py-1" style="color: rgb(37, 37, 123);">Add a Charity</a>
+      </div>
+      <!-- <a *ngIf="isLoggedIn" (click)="logout()" class="btn btn-light px-2 py-1" style="color: rgb(37, 37, 123);">Logout</a> -->
+      <!-- <a *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-light px-2 py-1" style="color: rgb(37, 37, 123);">Sign in</a> -->
+      <div class="menu">
+        <a *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-light px-2 py-1" style="color: rgb(37, 37, 123);">Sign in</a>
+        <button *ngIf="isLoggedIn" class="btn btn-light px-2 py-1"  style="white-space: nowrap;">My Account</button>
+        <ul class="drop-down">
+          <li>
+            <a routerLink="/dashboard" class=" px-2 py-1 text-black ">Profile</a>
+          </li>
+          <li>
+            <a  routerLink="/charityDash" class="px-2 py-1" style="white-space: nowrap;">Charity</a>
+          </li>
+          <li>
+            <a (click)="logout()" class="btn btn-light px-2 py-1" style="color: rgb(37, 37, 123);">Logout</a>
+          </li>
+        </ul>
+      </div>
+      
+  </div>
 </header>
-<nav class="navbar  sticky-top" style="box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;">
+<nav class="navbar  sticky-top" style="box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px; z-index: 500;">
     <div class="container">
   
       <div class="navbar-header">
@@ -60,3 +96,5 @@
     </div>
   </nav>
 
+</body>
+</html>

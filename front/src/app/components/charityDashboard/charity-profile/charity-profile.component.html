@@ -1,0 +1,61 @@
+
+
+<section class="profile_container">
+	<div class="profile_img_section">
+		<img class="profile_img-LG" [src]="'http://localhost:8080/uploads/'+charity?.files?.at(0)?.path" />
+		<!-- <div class="flag_wrapper">
+			<img class="flag" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/flag-south-korea_1f1f0-1f1f7.png" alt="South Korean Flag" />
+		</div> -->
+	</div>
+
+	<div class="profile_desc_section">
+		<h2>{{ charity?.name }}</h2>
+		<h3>Founded: {{charity?.foundationYear}} </h3>
+		
+		<div class="interests">
+			<span class="interests_item" *ngFor="let category of charity?.categories">{{ category.categoryName?.toString()?.replace("_", " ") }}</span>
+		</div>
+
+		<div class="card" style="width: 18rem;">
+			<div class="card-header d-flex align-items-center">
+				<i class="fas fa-address-book fa-2x mx-2"></i>
+				<h4 class="mb-0 ml-2">Contact:</h4>
+		</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					<div class="d-flex align-items-center">
+						<i class="fas fa-map-marker-alt link_icon"></i>
+						<h6 class="mx-2">{{charity?.address?.city}} </h6>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="d-flex align-items-center">
+						<i class="fas fa-phone"></i>
+						<h6 class="mx-2"> {{charity?.phone}} </h6>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<div class="d-flex align-items-center">
+						<i class="fas fa-university"></i>
+						<h6 class="mx-2"> {{charity?.rib}} </h6>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</section>
+
+<div class="info mt-3">
+	<div class="card">
+		<div class="card-header">
+			<h4>About us:</h4>
+		</div>
+		<div class="card-body">
+			<blockquote class="blockquote mb-0">
+				<p>{{charity?.description}} </p>
+				<!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
+			</blockquote>
+		</div>
+	</div>
+</div>

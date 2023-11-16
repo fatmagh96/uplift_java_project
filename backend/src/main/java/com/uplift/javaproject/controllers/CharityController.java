@@ -29,7 +29,7 @@ import com.uplift.javaproject.models.Charity;
 import com.uplift.javaproject.models.CharityAndAddressAndCategoriesRequest;
 import com.uplift.javaproject.models.File;
 import com.uplift.javaproject.models.User;
-import com.uplift.javaproject.models.enums.Categories;
+import com.uplift.javaproject.models.enums.CharityStatus;
 import com.uplift.javaproject.repositories.RoleRepository;
 import com.uplift.javaproject.services.AddressService;
 import com.uplift.javaproject.services.CategoryService;
@@ -71,23 +71,40 @@ public class CharityController {
 	public ResponseEntity<Object> allCharities() {
 		return ResponseEntity.ok().body(charityServ.allCharities());
 	}
-
-	@GetMapping("/charities/test")
-	public List<Charity> getAll() {
-		return charityServ.allCharities();
-	}
 	
-	@GetMapping("/charities/{categoryString}")
-	public List<Charity> getAllByCategory(@PathVariable String categoryString) {
-//		System.out.println(categoryString);
-		if(categoryString.equals("all")) { 
-			return charityServ.allCharities();
-		}
-		Categories categoryName = Categories.valueOf(categoryString);
-		Category c = categoryServ.findByCategoryName(categoryName);
-		System.out.println(charityServ.allCharitiesByCategory(c));
-		return charityServ.allCharitiesByCategory(c);
-	}
+    @GetMapping("/charities/{charityId}")
+    public ResponseEntity<?> showOne(@PathVariable Long charityId) {
+        try {
+            Charity maybeCharity = charityServ.findCharityById(charityId);
+
+            if (maybeCharity != null) {
+                return ResponseEntity.ok(maybeCharity);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Charity not found");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
+        }
+    }
+
+//	@GetMapping("/charities/test")
+//	public List<Charity> getAll() {
+//		return charityServ.allCharities();
+//	}
+//	
+//	@GetMapping("/charities/{categoryString}")
+//	public List<Charity> getAllByCategory(@PathVariable String categoryString) {
+////		System.out.println(categoryString);
+//		if(categoryString.equals("all")) { 
+//			return charityServ.allCharities();
+//		}
+//		Categories categoryName = Categories.valueOf(categoryString);
+//		Category c = categoryServ.findByCategoryName(categoryName);
+//		System.out.println(charityServ.allCharitiesByCategory(c));
+//		return charityServ.allCharitiesByCategory(c);
+//	}
 
 
 	@PostMapping("/charities/new")
@@ -119,6 +136,7 @@ public class CharityController {
 		}
 		System.out.println("ttesetstetstes2222222");
 		charity.setCategories(savedCategories);
+		charity.setStatus(CharityStatus.PENDING);
 
 		// Fetch User "founder"
 		User founder = userServ.findUserById((Long) session.getAttribute("user_id"));

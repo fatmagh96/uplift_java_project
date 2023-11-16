@@ -14,27 +14,42 @@ import { SavedCharitiesComponent } from './components/userDashboard/saved-charit
 import { EventsComponent } from './components/userDashboard/events/events.component';
 import { DonationHistoryComponent } from './components/userDashboard/donation-history/donation-history.component';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+import { DashboardCharityComponent } from './views/dashboard-charity/dashboard-charity.component';
+import { CharityProfileComponent } from './components/charityDashboard/charity-profile/charity-profile.component';
+import { CreateEventComponent } from './components/charityDashboard/create-event/create-event.component';
 
 
 const routes: Routes = [
-  {path:'', component: LandingPageComponent},
-  {path:'register', component: RegisterComponent},
-  {path:'userdashboard', component: UserDashboardComponent},
-  {path:'test', component: HomepageComponent},
-  {path:'select', component: MultiSelectComponent},
-  {path:'charities', component: CharitiesComponent},
-  {path:'createCharity', component: CreateCharityComponent},
-  {path:'login', component: LoginComponent},
-  {path:'charitypage', component: CharityPageComponent},
-  {path:'dashboard', component: DashboardUserComponent, 
-    children:[
-      {path:'profile', component: ProfileInfoComponent},
-      {path:'charities', component: SavedCharitiesComponent},
-      {path:'events', component: EventsComponent},
-      {path:'donations', component: DonationHistoryComponent},
+  { path: '', component: HomepageComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'userdashboard', component: UserDashboardComponent },
+  // {path:'test', component: HomepageComponent},
+  { path: 'select', component: MultiSelectComponent },
+  { path: 'charities', component: CharitiesComponent },
+  { path: 'createCharity', component: CreateCharityComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'charity/:charityId', component: CharityPageComponent },
+  {
+    path: 'dashboard', component: DashboardUserComponent,
+    children: [
+      { path: '', redirectTo: 'profile', pathMatch: 'full' },
+      { path: 'profile', component: ProfileInfoComponent },
+      { path: 'charities', component: SavedCharitiesComponent },
+      { path: 'events', component: EventsComponent },
+      { path: 'donations', component: DonationHistoryComponent },
 
-    ]},
-  
+    ]
+  },
+  {
+    path: 'charityDash', component: DashboardCharityComponent,
+    children: [
+      { path: '', redirectTo: 'profile', pathMatch: 'full' },
+      { path: 'profile', component: CharityProfileComponent },
+      { path: 'createEvent', component: CreateEventComponent },
+
+    ]
+  },
+
 ];
 
 @NgModule({

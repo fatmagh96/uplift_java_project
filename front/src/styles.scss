@@ -1,10 +1,15 @@
 body {
     font-family: Poppins;
+    background-color: #f8f9fa;
 }
 .multiselect-dropdown .selected-item {
     -webkit-animation: .2s ease-in borderscale;
     animation: .2s ease-in borderscale;
     max-width: fit-content !important;
+}
 
+p{
+    font-family: Roboto;
+}
 
-    }
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css');

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -24,6 +25,7 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = true;
     } 
     console.log('isLoggedIn:', this.isLoggedIn);
+    this.cdr.markForCheck();
   }
 
   logout() {

@@ -30,6 +30,11 @@ import { EventsComponent } from './components/userDashboard/events/events.compon
 import { DonationHistoryComponent } from './components/userDashboard/donation-history/donation-history.component';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DashboardCharityComponent } from './views/dashboard-charity/dashboard-charity.component';
+import { CharityProfileComponent } from './components/charityDashboard/charity-profile/charity-profile.component';
+import { CharityEventsComponent } from './components/charityDashboard/charity-events/charity-events.component';
+import { CharityDonationsComponent } from './components/charityDashboard/charity-donations/charity-donations.component';
+import { CreateEventComponent } from './components/charityDashboard/create-event/create-event.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +62,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     EventsComponent,
     DonationHistoryComponent,
     MultiSelectComponent,
+    DashboardCharityComponent,
+    CharityProfileComponent,
+    CharityEventsComponent,
+    CharityDonationsComponent,
+    CreateEventComponent,
   ],
   imports: [
     BrowserModule,

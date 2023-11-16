@@ -136,6 +136,7 @@ public class UserController {
 			HttpSession session) {
 		try {
 			Long userId = (Long) session.getAttribute("user_id");
+			System.out.println("session id : " + userId);
 			User user = userServ.findUserById(userId);
 			if (!newUser.getPassword().equals(newUser.getConfirm())) {
 				result.rejectValue("password", "regError", "Password and Confirm password must match :)");

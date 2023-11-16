@@ -36,6 +36,7 @@ $navbar-dropdown-separator-color: $border-color;
 
 body {
   font-family: $font-family;
+  font-weight: bold;
   font-size: $font-size-base;
 }
 
@@ -259,3 +260,83 @@ nav a{
   }
 }
 
+
+
+// Testing DROP MENU
+
+
+
+.menu {
+  // width: 100px;
+  // margin: 10px auto;
+  position: relative;
+  z-index: 999;
+
+  button {
+    border: none;
+    // width: 100%;
+    // padding: 10px;
+    // background: rgb(130, 130, 130);
+    // color: white;
+  }
+
+  ul {
+    list-style: none;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    perspective: 200px;
+    z-index: 998;
+    li {
+      padding: 10px;
+      display: none;
+      background: rgb(255, 255, 255);
+      color: black;
+      transform-origin: top center;
+      user-select: none;
+      z-index: 997;
+
+      &:hover {
+        // background: rgb(115, 115, 115);
+      }
+    }
+  }
+
+  &:hover {
+    @keyframes drop-down {
+      0% {
+        opacity: 0;
+        transform: rotateX(-90deg);
+      }
+      100% {
+        opacity: 1;
+        transform: rotateX(0);
+      }
+    }
+
+    button {
+      background: rgb(145, 145, 145);
+
+      + ul li {
+        display: block;
+        opacity: 0;
+        @for $i from 1 through 5 {
+          &:nth-child(#{$i}) {
+            animation: {
+              name: drop-down;
+              duration: 150ms;
+              delay: (75ms * $i) - 75ms;
+              timing-function: ease-in-out;
+              fill-mode: forwards;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.dropdown a:hover {
+  text-decoration: underline;
+}

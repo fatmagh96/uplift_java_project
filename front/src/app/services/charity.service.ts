@@ -25,4 +25,8 @@ export class CharityService {
   getAllCharitiesByCategory(category: any): Observable<Charity[]> {
     return this.http.get<Charity[]>(`${baseUrl}/${category}`);
   }
+
+  getCharityById(charityId: string | null): Observable<Charity> {
+    return this.http.get<Charity>(`${baseUrl}/${charityId}`);
+  }
 }

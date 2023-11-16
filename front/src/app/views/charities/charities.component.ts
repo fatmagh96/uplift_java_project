@@ -17,6 +17,7 @@ export class CharitiesComponent implements OnInit {
   tableSize: number = 5;
 
   category: string = "all";
+  city: string = "all";
   // tableSizes: any = [3, 6, 9, 12];
 
   filteredCharities: any[] = [];
@@ -101,86 +102,72 @@ export class CharitiesComponent implements OnInit {
       (response) => {
         console.log(response);
         this.charities = response;
+        this.filteredCharities = response;
       },
       (error) => console.log(error),
       () => console.log("Done getting charities")
     )
   }
 
+
   // filterByCategory(event: any) {
   //   console.log(event.target.value);
   //   this.category = event.target.value;
-  //   // this.charityService.getAllCharitiesByCategory(category).subscribe(
-  //   this.charityService.getAllCharities().subscribe(
-  //     (response) => {
-  //       console.log(response);
-  //       console.log("files:", this.charities);
-
-  //       if (this.category == "all") {
-  //         this.charities = response;
-  //         this.filteredCharities = response;
-  //       }
-  //       else {
-  //         const filteredCharities = this.filterCharitiesByCategory(response, this.category);
-  //         this.charities = filteredCharities;
-  //         this.filteredCharities = filteredCharities;
-  //       }
-  //     },
-  //     (error) => console.log(error),
-  //     () => console.log("Done getting charities")
-  //   );
+  //   if (this.category == "all") {
+  //     // this.charities = response;
+  //     this.filteredCharities = this.charities;
+  //   }
+  //   else {
+  //     const filteredCharities = this.filterCharitiesByCategory(this.filteredCharities, this.category);
+  //     // this.charities = filteredCharities;
+  //     this.filteredCharities = filteredCharities;
+  //   }
   // }
-
-  filterByCategory(event: any) {
-    console.log(event.target.value);
-    this.category = event.target.value;
-    if (this.category == "all") {
-      // this.charities = response;
-      this.filteredCharities = this.charities;
-    }
-    else {
-      const filteredCharities = this.filterCharitiesByCategory(this.filteredCharities, this.category);
-      // this.charities = filteredCharities;
-      this.filteredCharities = filteredCharities;
-    }
-  }
 
   // filterByCity(event: any) {
   //   console.log(event.target.value);
   //   const city = event.target.value;
-  //   // this.charityService.getAllCharitiesByCategory(category).subscribe(
-  //   this.charityService.getAllCharities().subscribe(
-  //     (response) => {
-  //       console.log(response);
+
   //       if (city == "all") {
-  //         this.charities = response;
-  //         this.filteredCharities = response;
+  //         // this.charities = response;
+  //         this.filteredCharities = this.charities;
   //       }
   //       else {
-  //         const filteredCharities = this.filterCharitiesByCity(response, city);
-  //         this.charities = filteredCharities;
+  //         const filteredCharities = this.filterCharitiesByCity(this.filteredCharities, city);
+  //         // this.charities = filteredCharities;
   //         this.filteredCharities = filteredCharities;
   //       }
-  //     },
-  //     (error) => console.log(error),
-  //     () => console.log("Done getting charities")
-  //   );
+    
   // }
 
+  filterByCategoryAndCity(category: string, city: string) {
+    if (category === 'all' && city === 'all') {
+      this.filteredCharities = this.charities; // Show all charities when both filters are 'all'
+    } else {
+      let filteredCharities = this.charities;
+  
+      if (category !== 'all') {
+        filteredCharities = this.filterCharitiesByCategory(filteredCharities, category);
+      }
+  
+      if (city !== 'all') {
+        filteredCharities = this.filterCharitiesByCity(filteredCharities, city);
+      }
+  
+      this.filteredCharities = filteredCharities;
+    }
+  }
+  
+  filterByCategory(event: any) {
+    console.log(event.target.value);
+    this.category = event.target.value;
+    this.filterByCategoryAndCity(this.category, this.city);
+  }
+  
   filterByCity(event: any) {
     console.log(event.target.value);
-    const city = event.target.value;
-
-        if (city == "all") {
-          // this.charities = response;
-          this.filteredCharities = this.charities;
-        }
-        else {
-          const filteredCharities = this.filterCharitiesByCity(this.filteredCharities, city);
-          // this.charities = filteredCharities;
-          this.filteredCharities = filteredCharities;
-        }
-    
+    this.city = event.target.value;
+    this.filterByCategoryAndCity(this.category, this.city);
   }
 
   //filter by charity name 

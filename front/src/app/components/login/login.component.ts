@@ -40,8 +40,9 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(this.loginUser).subscribe(
       (response) =>{
         console.log(response);
-        this.router.navigateByUrl("/test");
-        sessionStorage.setItem('user_id', String(response.id))
+        // this.router.navigateByUrl("/test");
+        sessionStorage.setItem('user_id', String(response.id));
+        this.router.navigateByUrl("/dashboard");
         // this.router.navigate();
       } ,
       (error) => console.log(error),

@@ -1,6 +1,7 @@
 package com.uplift.javaproject.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,13 @@ public class CharityService {
 	}
 
 	public Charity findCharityById(Long id) {
-		return charityRepo.findById(id).get();
-	}
+        Optional<Charity> maybeCharity = charityRepo.findById(id);
+        if(maybeCharity.isPresent()) {
+            return maybeCharity.get();
+        } else {
+            return null;
+        }
+    }
 	
 	public Charity updateCharity(Charity c) {
 		return charityRepo.save(c);

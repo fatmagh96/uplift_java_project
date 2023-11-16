@@ -45,8 +45,14 @@ export class UserService {
   }
 
   changePassword(user: User): Observable<User> {
-    // const headers = new HttpHeaders().set('Content-Type', 'application/json');        
-    return this.http.put<User>(`${baseUrl}/changePassword`, user, {withCredentials: true});
+    // const headers = new HttpHeaders().set('Content-Type', 'application/json');     
+    console.log("change password user : ",user);
+       
+    return this.http.put<any>(`${baseUrl}/changePassword`, user, {withCredentials: true});
   }
+
+  // followCharity(charityId: : void{
+
+  // }
 
 }
