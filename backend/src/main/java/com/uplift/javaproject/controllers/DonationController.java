@@ -62,9 +62,7 @@ public class DonationController {
 	        	return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
 	        }
 	        Charity charity = charityServe.findCharityById(charityId);
-	        
-	        
-	        
+
 	        SessionCreateParams.LineItem lineItem = SessionCreateParams.LineItem.builder()
 	        		.setPriceData(
 	        				SessionCreateParams.LineItem.PriceData.builder()
@@ -85,6 +83,20 @@ public class DonationController {
 	        		.setMode(SessionCreateParams.Mode.PAYMENT)
 	        		.setSuccessUrl("http://localhost:4200/dashboard")
 	        		.setCancelUrl("https://example.com/cancel")
+	        		.setConsentCollection(
+	        			      SessionCreateParams.ConsentCollection.builder()
+	        			        .setTermsOfService(SessionCreateParams.ConsentCollection.TermsOfService.REQUIRED)
+	        			        .build()
+	        			    )
+	        			    .setCustomText(
+	        			      SessionCreateParams.CustomText.builder()
+	        			        .setTermsOfServiceAcceptance(
+	        			          SessionCreateParams.CustomText.TermsOfServiceAcceptance.builder()
+	        			            .setMessage("I agree to the Terms of Service")
+	        			            .build()
+	        			        )
+	        			        .build()
+	        			        )
 	        		.build();
 	        
 	        Session stripeSession = Session.create(params);

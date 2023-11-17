@@ -35,6 +35,7 @@ import { CharityProfileComponent } from './components/charityDashboard/charity-p
 import { CharityEventsComponent } from './components/charityDashboard/charity-events/charity-events.component';
 import { CharityDonationsComponent } from './components/charityDashboard/charity-donations/charity-donations.component';
 import { CreateEventComponent } from './components/charityDashboard/create-event/create-event.component';
+import { TestDonationComponent } from './components/test-donation/test-donation.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { CreateEventComponent } from './components/charityDashboard/create-event
     CharityEventsComponent,
     CharityDonationsComponent,
     CreateEventComponent,
+    TestDonationComponent,
   ],
   imports: [
     BrowserModule,

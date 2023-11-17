@@ -17,6 +17,7 @@ import { MultiSelectComponent } from './components/multi-select/multi-select.com
 import { DashboardCharityComponent } from './views/dashboard-charity/dashboard-charity.component';
 import { CharityProfileComponent } from './components/charityDashboard/charity-profile/charity-profile.component';
 import { CreateEventComponent } from './components/charityDashboard/create-event/create-event.component';
+import { TestDonationComponent } from './components/test-donation/test-donation.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'userdashboard', component: UserDashboardComponent },
   // {path:'test', component: HomepageComponent},
+  {path:'testdonation', component: TestDonationComponent},
+
   { path: 'select', component: MultiSelectComponent },
   { path: 'charities', component: CharitiesComponent },
   { path: 'createCharity', component: CreateCharityComponent },

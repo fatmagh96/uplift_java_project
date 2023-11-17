@@ -63,8 +63,10 @@
   
   input[type="text"]:focus,
   input[type="password"]:focus {
-    border-bottom: 2px solid #16a085;
-    color: #16a085;
+    // border-bottom: 2px solid #16a085;
+    border-bottom: 2px solid #2f619b;
+    // color: #16a085;
+    color: #000000;
     transition: 0.2s ease;
   }
   
