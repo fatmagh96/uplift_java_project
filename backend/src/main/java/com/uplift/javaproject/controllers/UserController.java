@@ -170,7 +170,11 @@ public class UserController {
 
 		charity.getFollowers().add(follower);
 		charityServ.updateCharity(charity);
-		return ResponseEntity.ok("User successfully Followed a charity!");
+//		return (ResponseEntity<Object>) ResponseEntity.ok({"message":"User successfully Followed a charity!"});
+		Map<String, String> response = new HashMap<>();
+	    response.put("message", "User successfully Followed a charity!");
+
+	    return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	// UNFOLLOW -------------------------------------------------------
@@ -183,7 +187,10 @@ public class UserController {
 
 		charity.getFollowers().remove(follower);
 		charityServ.updateCharity(charity);
-		return ResponseEntity.ok("User Unfollowed a charity!");
+		Map<String, String> response = new HashMap<>();
+	    response.put("message", "User successfully UnFollowed a charity!");
+
+	    return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	

@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class Donation {
 
     private Double amount;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "donor_id")
     private User donor;
@@ -86,6 +89,16 @@ public class Donation {
 	public void setRecipient(Charity recipient) {
 		this.recipient = recipient;
 	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	
+	
 	
 	
 	

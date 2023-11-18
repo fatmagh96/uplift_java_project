@@ -29,4 +29,12 @@ export class CharityService {
   getCharityById(charityId: string | null): Observable<Charity> {
     return this.http.get<Charity>(`${baseUrl}/${charityId}`);
   }
+
+  followCharity(charityId: string | null): any {
+    return this.http.post<any>(`${baseUrl}/follow/${charityId}`, {}, {withCredentials: true});
+  }
+
+  unfollowCharity(charityId: string | null): any {
+    return this.http.post<any>(`${baseUrl}/unfollow/${charityId}`, {}, {withCredentials: true});
+  }
 }

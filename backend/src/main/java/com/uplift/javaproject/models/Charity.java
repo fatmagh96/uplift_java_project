@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.uplift.javaproject.models.enums.CharityStatus;
 
 import jakarta.persistence.CascadeType;
@@ -27,6 +29,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -48,8 +51,14 @@ public class Charity {
 	private String rib;
 	@NotEmpty(message = "phone is required!")
 	private String phone;
+	
+	@Column(length = 2000)
 	@NotEmpty(message = "description is required!")
-	private String description;
+    private String description;
+
+    @NotEmpty(message = "Email is required!")
+    @Email(message = "Please enter a valid email!")
+    private String email;
 	
 	
 	private String logo;
@@ -82,7 +91,7 @@ public class Charity {
 	private Address address;
 
 	// M:M Users to Event = Participants
-	@JsonIgnore
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "charities_followers", 
 						joinColumns = @JoinColumn(name = "charity_id"), 
@@ -96,12 +105,13 @@ public class Charity {
 	private List<Category> categories;
 
 	// 1:M Charity to Event
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy = "eventCreator", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Event> charityEvents;
 	
 	// 1:M Charity to Donations
-	@JsonIgnore
+//	@JsonIgnore
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	@OneToMany(mappedBy = "recipient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Donation> donationsReceived;
 	
@@ -255,6 +265,16 @@ public class Charity {
 	public void setFiles(List<File> files) {
 		this.files = files;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 	
 	
 

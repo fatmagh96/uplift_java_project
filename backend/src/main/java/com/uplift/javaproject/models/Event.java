@@ -3,7 +3,9 @@ package com.uplift.javaproject.models;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,6 +27,7 @@ import jakarta.validation.constraints.NotEmpty;
 @Transactional
 @Entity
 @Table(name = "events")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Event {
 
 	// Member variables
@@ -46,13 +49,13 @@ public class Event {
 
 	// M:1 Events to charity -----------------------------------------
 
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "charity_id")
 	private Charity eventCreator;
 
 	// M:M Users to Event = Participants
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "event_participants", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> participants;
@@ -60,13 +63,13 @@ public class Event {
 	
 
 	// 1:1 Address Relation Event ------------------------
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "eventAddress_id")
 	private Address eventAddress;
 
 	// M:M Event to Category
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "events_categories", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "eventCategory_id"))
 	private List<Category> eventCategories;

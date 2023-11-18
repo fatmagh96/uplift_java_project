@@ -16,4 +16,9 @@ public class AddressService {
 	public Address createAddress(Address a) {
 		return addressRepo.save(a);
 	}
+	
+	// UPDATE
+		public Address updateAddress(Address a) {
+			return addressRepo.save(a);
+		}
 }

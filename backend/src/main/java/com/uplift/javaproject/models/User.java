@@ -91,6 +91,7 @@ public class User {
 	private List<Event> participatedEvents;
 
 	// M:M Users to Charities = follow
+//	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	@ManyToMany
 	@JoinTable(name = "charities_followers", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "charity_id"))
 	private List<Charity> followedCharities;
@@ -202,5 +203,15 @@ public class User {
 	public void setIsBanned(Boolean isBanned) {
 		this.isBanned = isBanned;
 	}
+
+	public List<Donation> getDonations() {
+		return donations;
+	}
+
+	public void setDonations(List<Donation> donations) {
+		this.donations = donations;
+	}
+	
+	
 
 }

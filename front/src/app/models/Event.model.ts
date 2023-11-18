@@ -11,8 +11,8 @@ export class Event {
   startDate?: Date;
   endDate?: Date;
   description?: string;
-
-  
+  address?: Address = new Address();
+  categories?: Category[]; 
   eventCreator?: Charity;
   participants?: User[];
   eventAddress?: Address;

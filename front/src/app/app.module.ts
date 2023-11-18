@@ -36,6 +36,11 @@ import { CharityEventsComponent } from './components/charityDashboard/charity-ev
 import { CharityDonationsComponent } from './components/charityDashboard/charity-donations/charity-donations.component';
 import { CreateEventComponent } from './components/charityDashboard/create-event/create-event.component';
 import { TestDonationComponent } from './components/test-donation/test-donation.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
+import { EventPageComponent } from './views/event-page/event-page.component';
+import { EventsListComponent } from './views/events-list/events-list.component';
+import { EventCardComponent } from './components/eventsList/event-card/event-card.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +74,10 @@ import { TestDonationComponent } from './components/test-donation/test-donation.
     CharityDonationsComponent,
     CreateEventComponent,
     TestDonationComponent,
+    ModalComponent,
+    EventPageComponent,
+    EventsListComponent,
+    EventCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +87,7 @@ import { TestDonationComponent } from './components/test-donation/test-donation.
     ReactiveFormsModule,
     NgxPaginationModule,
     NgMultiSelectDropDownModule.forRoot(),
+    MdbModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

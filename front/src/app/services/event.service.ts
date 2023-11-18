@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EventDto } from '../models/EventDto.model';
+import { Event } from '../models/Event.model';
 
 
-const baseUrl = 'http://localhost:8080/api/';
+const baseUrl = 'http://localhost:8080/api/events';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class EventService {
   constructor(private http: HttpClient){}
 
   createEvent(event : EventDto): Observable<Event>{
-    return this.http.post<any>(baseUrl+"events", event ,{withCredentials: true})
+    return this.http.post<any>(baseUrl, event ,{withCredentials: true})
+  }
+
+  getAllEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(baseUrl);
   }
 }

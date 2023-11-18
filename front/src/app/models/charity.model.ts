@@ -8,6 +8,7 @@ export class Charity {
     name?: string;
     rib?: string;
     phone?: string;
+    email?: string;
     description?: string;
     logo?: string;
     foundationYear?: number;

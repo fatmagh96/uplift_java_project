@@ -18,6 +18,7 @@ import { DashboardCharityComponent } from './views/dashboard-charity/dashboard-c
 import { CharityProfileComponent } from './components/charityDashboard/charity-profile/charity-profile.component';
 import { CreateEventComponent } from './components/charityDashboard/create-event/create-event.component';
 import { TestDonationComponent } from './components/test-donation/test-donation.component';
+import { EventsListComponent } from './views/events-list/events-list.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
 
   { path: 'select', component: MultiSelectComponent },
   { path: 'charities', component: CharitiesComponent },
+  { path: 'events', component: EventsListComponent },
   { path: 'createCharity', component: CreateCharityComponent },
   { path: 'login', component: LoginComponent },
   { path: 'charity/:charityId', component: CharityPageComponent },
@@ -39,7 +41,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileInfoComponent },
       { path: 'charities', component: SavedCharitiesComponent },
       { path: 'events', component: EventsComponent },
-      { path: 'donations', component: DonationHistoryComponent },
+      { path: 'donations', component: DonationHistoryComponent, data: {'data':'user'} },
 
     ]
   },

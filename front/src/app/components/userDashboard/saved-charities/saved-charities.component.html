@@ -1,1 +1,143 @@
-<p>saved-charities works!</p>
+<h1 class="mb-5 ">Welcome, {{user.firstName}}!</h1>
+
+<h3>Saved Charities</h3>
+
+<div>
+
+
+    
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Charity Name</th>
+                <th scope="col">Categories</th>
+                <th scope="col">Rib</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Event</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Event</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <hr>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <!-- Charity Information Columns -->
+                <th>Charity Name</th>
+                <th>Location</th>
+                <th>Contact</th>
+
+                <!-- Event Information Columns -->
+                <th>Event Name</th>
+                <th>Event Date</th>
+                <th>Event Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Charity 1 with multiple events -->
+            <tr>
+                <!-- Charity Information -->
+                <td rowspan="2">Charity 1</td>
+                <td rowspan="2">City, Country</td>
+                <td rowspan="2">Contact Info</td>
+
+                <!-- Event 1 for Charity 1 -->
+                <td>Event 1A</td>
+                <td>Date 1A</td>
+                <td>Location 1A</td>
+            </tr>
+            <tr>
+                <!-- Event 2 for Charity 1 -->
+                <td>Event 1B</td>
+                <td>Date 1B</td>
+                <td>Location 1B</td>
+            </tr>
+
+            <!-- Charity 2 with a single event -->
+            <tr>
+                <!-- Charity Information -->
+                <td>Charity 2</td>
+                <td>City, Country</td>
+                <td>Contact Info</td>
+
+                <!-- Event for Charity 2 -->
+                <td>Event 2A</td>
+                <td>Date 2A</td>
+                <td>Location 2A</td>
+            </tr>
+
+            <!-- Add more charities and events as needed -->
+        </tbody>
+    </table>
+
+
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -6,10 +6,21 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './dashboard-user.component.html',
   styleUrls: ['./dashboard-user.component.scss']
 })
-export class DashboardUserComponent {
+export class DashboardUserComponent implements OnInit {
   router: any;
+  user!: any;
 
   constructor(private userService: UserService,) {}
+
+  ngOnInit() {
+    // Assume you fetch user data from a service or API
+    this.user = {
+      id: 1,
+      username: 'john_doe',
+      email: 'john@example.com',
+      // ... other user properties
+    };
+  }
 
   logout() {
     this.userService.logoutUser().subscribe(

@@ -7,4 +7,5 @@ export class Donation {
   amount?: number;
   donor?: User;
   recipient?: Charity;
+  createdAt?: Date;
 }

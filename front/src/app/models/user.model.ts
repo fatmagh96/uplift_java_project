@@ -1,4 +1,5 @@
 import { Charity } from "./charity.model";
+import { Donation } from "./donation.model";
 
 export class User {
 
@@ -14,6 +15,6 @@ export class User {
     charity?: Charity;
     participatedEvents?: Event[];
     followedCharities?: Charity[];
-    // donations?: Donation[];
+    donations?: Donation[];
 
 }
