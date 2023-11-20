@@ -19,6 +19,7 @@ export class ProfileInfoComponent implements OnInit {
       (response) => {
         console.log(response);
         this.user = response;
+        this.user.password = "";
       },
       (error) => {
         console.log(error);

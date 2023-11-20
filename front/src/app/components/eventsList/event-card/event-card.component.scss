@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@300;500&family=Nabla&family=Poppins:wght@300;500&family=Roboto:wght@300&display=swap');
 .category-pill {
     // font-family: sofia-pro;
     font-style: normal;
@@ -15,4 +16,10 @@
 .location {
     padding-top: 2px;
     margin-left: 5px;
+}
+
+h3 {
+    font-family: Heebo;
+    font-weight: 500;
+    font-size: 26px;
 }

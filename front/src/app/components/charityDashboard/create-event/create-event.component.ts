@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Event } from 'src/app/models/Event.model';
 import { EventDto } from 'src/app/models/EventDto.model';
 import { Address } from 'src/app/models/address.model';
@@ -58,7 +59,8 @@ export class CreateEventComponent implements OnInit {
     };
   }
 
-  constructor(private eventService: EventService){
+  constructor(private eventService: EventService,
+    private router: Router){
   }
 
 
@@ -75,6 +77,7 @@ export class CreateEventComponent implements OnInit {
     this.eventService.createEvent(this.dto).subscribe(
       (response) =>{
         console.log(response);
+        this.router.navigateByUrl("/charityDash/events")
       } ,
       (error) => {console.log(error)
       this.dto.categories = []

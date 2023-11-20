@@ -18,6 +18,10 @@ export class CharityService {
     return this.http.post<any>(`http://localhost:8080/api/charities/new`, charity, {withCredentials: true});
   }
 
+  updateCharity(charityId: string | undefined, charity: any): Observable<Charity> {
+    return this.http.put<any>(`${baseUrl}/${charityId}`, charity, {withCredentials: true})
+  }
+
   getAllCharities(): Observable<Charity[]> {
     return this.http.get<Charity[]>(baseUrl);
   }

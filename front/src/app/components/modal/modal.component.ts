@@ -12,23 +12,21 @@ export class ModalComponent implements OnInit{
 
   amount:  any;
 
-  title: string | null = null;
+  charityId?: string | null;
 
   constructor(public modalRef: MdbModalRef<ModalComponent>, private donationService: DonationService) {}
-  ngOnInit(): void {
-    
-    console.log(this.title, "fdvshvhsd");
+  
+  ngOnInit(): void { 
+    console.log(this.charityId, "fdvshvhsd");
   }
+
   testClick(): void {
     alert('Button inside the modal clicked!');
   }
 
   onSubmit(){
-    console.log(this.amount,"hello");
-    
-    
-    
-    this.donationService.makeDonation(this.amount).subscribe({
+    console.log(this.amount,"hello");    
+    this.donationService.makeDonation(this.amount, this.charityId ).subscribe({
       next: async (response) => {
         // Load the Stripe.js library
         const stripe = await loadStripe('pk_test_51OD2cRKDCE1r65sMLGSO5UGeP2Y5OhTkurjvW66sxtcveUGG1Tr1qezaUqdTCz2glgb12zOg6LOibxNQvH9oYLIL00V57s61xh');

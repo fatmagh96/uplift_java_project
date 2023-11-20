@@ -19,6 +19,8 @@ export class EventsListComponent implements OnInit {
   city: string = "all";
   // tableSizes: any = [3, 6, 9, 12];
 
+  sorted_events!: Event[];
+
   filteredEvents: any[] = [];
   filterText: string = '';
 
@@ -75,17 +77,18 @@ export class EventsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.onGetEvents();
+
   }
   
   filterEventsByCategory(events: Event[], categoryName: string): Event[] {
     return events.filter(event =>
-      event.categories?.some(category => category.categoryName?.toString() === categoryName)
+      event.eventCategories?.some(category => category.categoryName?.toString() === categoryName)
     );
   }
 
   filterEventsByCity(events: Event[], city: string): Event[] {
     return events.filter(event =>
-      event.address?.city?.toString() === city
+      event.eventAddress?.city?.toString() === city
     );
   }
 
@@ -95,6 +98,14 @@ export class EventsListComponent implements OnInit {
         console.log(response);
         this.events = response;
         this.filteredEvents = response;
+        this.sorted_events = this.events.sort((a, b) => {
+          const dateA = a.startDate ? new Date(a.startDate).getTime() : 0;
+          const dateB = b.startDate ? new Date(b.startDate).getTime() : 0;
+          return dateB - dateA;
+      });
+      console.log("sorted events",this.sorted_events);
+      
+      
       },
       (error) => console.log(error),
       () => console.log("Done getting events")
@@ -117,6 +128,8 @@ export class EventsListComponent implements OnInit {
       }
   
       this.filteredEvents = filteredEvents;
+      console.log("filtered events: ", this.filteredEvents);
+      
     }
   }
   
@@ -124,6 +137,8 @@ export class EventsListComponent implements OnInit {
     console.log(event.target.value);
     this.category = event.target.value;
     this.filterByCategoryAndCity(this.category, this.city);
+    console.log("ciiiity", this.city, "categoryy ", this.category);
+    
   }
   
   filterByCity(event: any) {

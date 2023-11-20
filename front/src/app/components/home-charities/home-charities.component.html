@@ -1,4 +1,4 @@
-<div class="p-4 " style="background-color: #f7f5f3;">
+<div class="p-4 border-bottom  border-1" >
     <div class="container">
     <div class="header container d-flex justify-content-between align-items-center mb-3">
         <h2 class="fw-medium  " style="font-family: Poppins; ">Charities</h2>
@@ -15,7 +15,7 @@
                     </div>
                     <div class="card-body">
                         <h3>{{charity.name}}</h3>
-                        <!-- <p style="font-size: 14px; font-weight: lighter; color: rgb(55, 55, 55); overflow: hidden;">{{ charity.description | slice:0:120 }}{{ (charity.description ?? '').length > 120 ? '...' : '' }}</p> -->
+                        <p style="font-size: 14px; font-weight: lighter; color: rgb(55, 55, 55); overflow: hidden;">{{ charity.description | slice:0:120 }}{{ (charity.description ?? '').length > 120 ? '...' : '' }}</p>
                         <!-- <div class="category-pill text-center m" style="width: 90px;">children</div> -->
                     </div>
                 

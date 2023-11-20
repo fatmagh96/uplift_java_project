@@ -11,7 +11,7 @@ export class DonationService {
 
   constructor(private http: HttpClient) { }
 
-  makeDonation(amount:any): Observable<any> {
-    return this.http.post<Donation>("http://localhost:8080/api/donation/2", amount, {withCredentials: true} )
+  makeDonation(amount:any, charityId:any): Observable<any> {
+    return this.http.post<Donation>(`http://localhost:8080/api/donation/${charityId}`, amount, {withCredentials: true} )
   }
 }

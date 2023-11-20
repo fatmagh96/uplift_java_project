@@ -107,6 +107,7 @@ public class Charity {
 	// 1:M Charity to Event
 //	@JsonIgnore
 	@OneToMany(mappedBy = "eventCreator", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private List<Event> charityEvents;
 	
 	// 1:M Charity to Donations

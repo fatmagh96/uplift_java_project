@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CharityDto } from 'src/app/models/CharityDto.model';
 import { Address } from 'src/app/models/address.model';
 import { Category } from 'src/app/models/category.model';
@@ -67,7 +68,8 @@ export class CreateCharityComponent implements OnInit {
     };
   }
 
-  constructor(private charityService: CharityService) {
+  constructor(private charityService: CharityService,
+    private router: Router,) {
     const currentYear = new Date().getFullYear();
     for (let year = currentYear; year >= currentYear - 50; year--) {
       this.yearOptions.push(year);
@@ -88,31 +90,10 @@ export class CreateCharityComponent implements OnInit {
     console.log("DTO: ",this.dto);
 
 
-    // this.charityService.createCharity(this.dto).subscribe(
 
-    //   (response) =>{
-    //     console.log(response);
-    //   } ,
-    //   (error) => {console.log(error)
-    //   this.dto.categories = []
-    //   },
-    //   () => console.log("Success creating charity")
-
-    // );
 
     const formData: FormData = new FormData();
 
-    // // Add charity and address data
-    // formData.append('charity', JSON.stringify(this.charity));
-    // formData.append('address', JSON.stringify(this.address));
-
-    // // Add categories data
-    // for (let index = 0; index < this.selectedCategories.length; index++) {
-    //   const element = this.selectedCategories[index];
-    //   let newCategory: Category = new Category();
-    //   newCategory.categoryName = element;
-    //   formData.append('categories[]', JSON.stringify(newCategory));
-    // }
 
     // Add files
     // Add logo file
@@ -126,6 +107,7 @@ export class CreateCharityComponent implements OnInit {
     this.charityService.createCharity(formData).subscribe(
       (response) => {
         console.log(response);
+        this.router.navigateByUrl("/charityDash");
       },
       (error) => {
         console.log(error);

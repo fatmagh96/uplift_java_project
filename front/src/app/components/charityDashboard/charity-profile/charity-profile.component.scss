@@ -1,176 +1,137 @@
-h2 {
-	font-family: "Poppins";
-	font-size: 36px;
-
-	margin-bottom: 15px;
+body {
+    background-color: #f9f9fa
 }
 
-h3 {
-	font-size: 24px;
-	font-weight: 500;
-	color: rgba(34, 34, 34, 0.5);
-
-	margin-bottom: 25px;
-	margin-top: 0px;
+.padding {
+    padding: 3rem !important
 }
 
-h3,
-span,
+.user-card-full {
+    overflow: hidden;
+}
+
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+    box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+    border: none;
+    margin-bottom: 30px;
+}
+
+.m-r-0 {
+    margin-right: 0px;
+}
+
+.m-l-0 {
+    margin-left: 0px;
+}
+
+.user-card-full .user-profile {
+    border-radius: 5px 0 0 5px;
+}
+
+.bg-c-lite-green {
+            background: -webkit-gradient(linear, left top, right top, from(#7f90df), to(#3d4b82));
+    background: linear-gradient(to right, #7f90df, #3d4b82);
+}
+
+.user-profile {
+    padding: 20px 0;
+}
+
+.card-block {
+    padding: 1.25rem;
+}
+
+.m-b-25 {
+    margin-bottom: 25px;
+}
+
+.img-radius {
+    border-radius: 5px;
+    width: 200px;
+    height: 200px;
+}
+
+
+
+h6 {
+    font-size: 14px;
+}
+
+.card .card-block p {
+    line-height: 25px;
+}
+
+@media only screen and (min-width: 1400px){
 p {
-	font-family: "Avenir";
+    font-size: 14px;
+}
 }
 
-.profile_container,
-.info,
-.back {
-	margin: 60px 100px 0px;
-	max-width: 900px;
-	display: flex;
-	overflow-x: hidden;
+.card-block {
+    padding: 1.25rem;
 }
 
-.back {
-	display: flex;
-	align-items: center;
-	color: rgba(34, 34, 34, 0.5);
+.b-b-default {
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.back i {
-	margin-right: 15px;
+.m-b-20 {
+    margin-bottom: 20px;
 }
 
-.profile_img-LG {
-	height: 300px;
-	width: 300px;
-	border-radius: 40px;
-
-	object-fit: cover;
-	object-position: 50% 50%;
-
-	background-position: 40% 50%;
+.p-b-5 {
+    padding-bottom: 5px !important;
 }
 
-.flag_wrapper {
-	width: 50px;
-	height: 50px;
-	background-color: #f2f2f2;
-	border-radius: 100%;
-	position: relative;
-	top: -70px;
-	left: 230px;
+.card .card-block p {
+    line-height: 25px;
 }
 
-.flag {
-	width: 30px;
-	height: 30px;
-	position: absolute;
-	right: 0;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	margin: auto auto;
+.m-b-10 {
+    margin-bottom: 10px;
 }
 
-.description {
-	margin-bottom: 30px;
-	margin-top: 0px;
+.text-muted {
+    color: #919aa3 !important;
 }
 
-.profile_img_section {
-	margin-right: 50px;
+.b-b-default {
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.profile_desc_section {
-	display: flex;
-	flex-direction: column;
-
-	margin-left: 50px;
+.f-w-600 {
+    font-weight: 600;
 }
 
-.interests_item {
-	display: inline-block;
-	padding: 5px 15px;
-	margin-right: 7.5px;
-	margin-bottom: 10px;
-	line-height: 35px;
-	background-color: #e6e6e6;
-	border-radius: 5px;
-
-	color: rgba(34, 34, 34, 0.5);
+.m-b-20 {
+    margin-bottom: 20px;
 }
 
-.info {
-	margin-top: -20px;
-	margin-left: 100px;
+.m-t-40 {
+    margin-top: 20px;
 }
 
-.link_img_wrapper {
-	width: 40px;
-	height: 40px;
-	background-color: #f2f2f2;
-	border-radius: 10px;
-	position: relative;
+.p-b-5 {
+    padding-bottom: 5px !important;
 }
 
-.link_img {
-	height: 20px;
-	width: 20px;
-	position: absolute;
-	right: 0;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	margin: auto auto;
+.m-b-10 {
+    margin-bottom: 10px;
 }
 
-ul {
-	padding: 0px;
+.m-t-40 {
+    margin-top: 20px;
 }
 
-li {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	margin-bottom: 5px;
+.user-card-full .social-link li {
+    display: inline-block;
 }
 
-li p {
-	margin-left: 30px;
-	color: rgba(34, 34, 34, 0.5);
-}
-
-@media screen and (max-width: 1000px) {
-	.profile_container,
-	.info,
-	.back {
-		margin: 60px 33px 0px;
-	}
-
-	.profile_container {
-		flex-direction: column;
-	}
-
-	.profile_img_section {
-		margin: 0 auto;
-	}
-
-	.profile_img-LG {
-		width: 300px;
-		height: 300px;
-		border-radius: 100%;
-	}
-
-	.flag_wrapper {
-	}
-
-	.profile_desc_section {
-		margin-left: 0px;
-		margin-bottom: 10px;
-		margin-top: -40px;
-	}
-
-	.info {
-		margin-top: 10px;
-		margin-left: 33px;
-	}
+.user-card-full .social-link li a {
+    font-size: 20px;
+    margin: 0 10px 0 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }

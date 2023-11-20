@@ -81,7 +81,7 @@ public class DonationController {
 	        SessionCreateParams params = SessionCreateParams.builder()
 	        		.addLineItem(lineItem)
 	        		.setMode(SessionCreateParams.Mode.PAYMENT)
-	        		.setSuccessUrl("http://localhost:4200/dashboard")
+	        		.setSuccessUrl("http://localhost:4200/success")
 	        		.setCancelUrl("https://example.com/cancel")
 	        		.setConsentCollection(
 	        			      SessionCreateParams.ConsentCollection.builder()
@@ -105,10 +105,12 @@ public class DonationController {
 	       
 
 	        // Find existing donation or create a new one
-	        Donation newDonation = donationServe.findOne(user);
-	        if (newDonation == null) {
-	            newDonation = new Donation();
-	        }
+//	        Donation newDonation = donationServe.findOne(user);
+//	        if (newDonation == null) {
+//	            newDonation = new Donation();
+//	        }
+	        
+	        Donation newDonation = new Donation();
 
 	        // Create a Stripe Session
 

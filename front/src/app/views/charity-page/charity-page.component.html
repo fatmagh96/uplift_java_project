@@ -20,7 +20,7 @@
             <div class="mt-1">
                 <div class="d-flex align-items-center ">
                     <h1>{{charity.name}}</h1>
-                    <div class="anim-icon anim-icon-md bookmark" style="margin-top: 13px;">
+                    <div *ngIf="session" class="anim-icon anim-icon-md bookmark" style="margin-top: 13px;">
                         <input type="checkbox" id="bookmark1" [checked]='checked' (change)="onSubmit()" />
                         <label for="bookmark1"></label>
                       </div>

@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         console.log(response);
         // this.router.navigateByUrl("/test");
         sessionStorage.setItem('user_id', String(response.id));
-        this.router.navigateByUrl("/dashboard");
+        this.router.navigateByUrl("/");
         // this.router.navigate();
       } ,
       (error) => console.log(error),

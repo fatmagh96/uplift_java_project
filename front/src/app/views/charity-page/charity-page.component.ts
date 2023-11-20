@@ -22,6 +22,8 @@ export class CharityPageComponent implements OnInit {
 
   checked: boolean = true;
 
+  session!: string | null;
+
   modalRef: MdbModalRef<ModalComponent> | null = null;
 
   constructor(private route: ActivatedRoute,
@@ -38,6 +40,9 @@ export class CharityPageComponent implements OnInit {
         
         console.log(this.followedCharities);
 
+        this.session = sessionStorage.getItem("user_id");
+        console.log("session storage",sessionStorage.getItem("user_id"));
+
         if (this.followedCharities.some(charity=>charity.name === this.charity.name)){
             console.log("It's here!!!");
             this.checked = true
@@ -53,7 +58,7 @@ export class CharityPageComponent implements OnInit {
   openModal() {
     this.modalRef = this.modalService.open(ModalComponent, {
       modalClass: 'modal-dialog-centered',
-      data: {title: "hello from page charity id"}
+      data: {charityId: this.charityId}
     }, )
   }
 

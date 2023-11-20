@@ -1,14 +1,8 @@
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css'>
-<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css'>
-
-
 <app-navbar></app-navbar>
-<div class="container">
-  <div class="page-wrapper chiller-theme toggled">
-    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-      <i class="fas fa-lg fa-bars"></i>
-    </a>
-    <nav id="sidebar" class="sidebar-wrapper">
+
+  <div class="page-wrapper chiller-theme toggled d-flex gap-2  ">
+
+    <div id="sidebar" class="sidebar-wrapper p-3">
       <div class="sidebar-content">
         <div class="sidebar-brand">
           <div id="close-sidebar">
@@ -29,13 +23,13 @@
               </a>
             </li>
             <li class="sidebar-dropdown">
-              <a href="#">
+              <a [routerLink]="['followers']">
                 <i class="fa fa-credit-card"></i>
                 <span>Donations</span>
               </a>
             </li>
             <li class="sidebar-dropdown">
-              <a routerLink="/charityDash/createEvent">
+              <a [routerLink]="['events']">
                 <i class="fa fa-calendar"></i>
                 <span>Events</span>
               </a>
@@ -83,19 +77,9 @@
           <i class="fab fa-lg fa-youtube"></i>
         </a>
       </div>
-    </nav>
-    <!-- sidebar-wrapper  -->
-    <main class="page-content">
-      <div id="overlay" class="overlay"></div>
-      <div class="container-fluid">
-        <router-outlet></router-outlet>
-      </div>
-  
-    </main>
-    <!-- page-content" -->
+    </div>
+    
+    <div class="page-content " style="margin-left: 250px;">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-</div>
-<!-- page-wrapper -->
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/esm/popper.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js'></script> -->

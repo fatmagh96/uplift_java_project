@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +27,6 @@ import jakarta.validation.constraints.NotEmpty;
 @Transactional
 @Entity
 @Table(name = "events")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Event {
 
 	// Member variables
@@ -43,7 +42,8 @@ public class Event {
 
 	@FutureOrPresent
 	private Date endDate;
-
+	
+	@Column(length = 2000)
 	@NotBlank
 	private String description;
 
@@ -52,12 +52,14 @@ public class Event {
 //	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "charity_id")
+//	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private Charity eventCreator;
 
 	// M:M Users to Event = Participants
 //	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "event_participants", joinColumns = @JoinColumn(name = "event_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private List<User> participants;
 
 	
@@ -78,6 +80,7 @@ public class Event {
 	public Event() {
 	}
 
+	
 	
 	public Charity getEventCreator() {
 		return eventCreator;

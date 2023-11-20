@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>Charity Settings</h2>
+  <form class="p-3">
+    <div class="mb-3">
+      <label for="name" class="form-label">Charity Name:</label>
+      <input type="text" [(ngModel)]="charity!.name" name="name" id="name" class="form-control w-50" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone:</label>
+      <input [(ngModel)]="charity!.phone" name="phone" class="form-control w-50" />
+    </div>
+
+    <div class="mb-3">
+      <label for="street" class="form-label">Street:</label>
+      <input [(ngModel)]="address!.street" name="street" class="form-control w-50" />
+    </div>
+
+    <div class="mb-3">
+      <label for="city" class="form-label">City:</label>
+      <select [(ngModel)]="address!.city" name="city" class="form-select w-50">
+        <option *ngFor="let city of citiesList" [value]="city">{{ city }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="zipCode" class="form-label">Zip Code:</label>
+      <input [(ngModel)]="address!.zipCode" name="zipCode" class="form-control w-50" />
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea [(ngModel)]="charity!.description" name="description" class="form-control w-50"></textarea>
+    </div>
+
+    <button (click)="editCharity()" class="btn btn-primary">Confirm</button>
+    <a routerLink="/charityDash/profile" class="btn btn-danger mx-2">Cancel</a>
+  </form>
+</div>

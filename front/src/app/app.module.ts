@@ -41,6 +41,9 @@ import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { EventPageComponent } from './views/event-page/event-page.component';
 import { EventsListComponent } from './views/events-list/events-list.component';
 import { EventCardComponent } from './components/eventsList/event-card/event-card.component';
+import { SuccessDonationComponent } from './components/success-donation/success-donation.component';
+import { EditCharityComponent } from './components/charityDashboard/edit-charity/edit-charity.component';
+import { MyEventsListComponent } from './components/charityDashboard/events-list/events-list.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +81,9 @@ import { EventCardComponent } from './components/eventsList/event-card/event-car
     EventPageComponent,
     EventsListComponent,
     EventCardComponent,
+    SuccessDonationComponent,
+    EditCharityComponent,
+    MyEventsListComponent
   ],
   imports: [
     BrowserModule,

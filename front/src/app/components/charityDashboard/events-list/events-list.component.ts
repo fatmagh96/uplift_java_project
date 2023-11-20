@@ -1,29 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
+import { Event } from 'src/app/models/Event.model';
+import { Charity } from 'src/app/models/charity.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-charity-donations',
-  templateUrl: './charity-donations.component.html',
-  styleUrls: ['./charity-donations.component.scss']
+  selector: 'app-events-list',
+  templateUrl: './events-list.component.html',
+  styleUrls: ['./events-list.component.scss']
 })
-export class CharityDonationsComponent implements OnInit {
+export class MyEventsListComponent implements OnInit {
 
-  followersList!: User[] | undefined;
-
-
+  charity: Charity | undefined;
+  eventsList!: Event[] | undefined;
   constructor(
     private userService: UserService,
     private router: Router,
   ) {}
 
-
   ngOnInit() {
     this.userService.getLoggedUser().subscribe(
       (response) => {
         console.log(response);
-        this.followersList = response.charity?.followers;
+        this.eventsList = response.charity?.followers;
       },
       (error) => console.log(error),
       () => console.log("Done getting Charity")

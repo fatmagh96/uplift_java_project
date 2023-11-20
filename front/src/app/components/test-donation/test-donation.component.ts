@@ -18,7 +18,7 @@ amount: any;
   makeDonation(){
 
     
-    this.donationService.makeDonation(this.amount).subscribe({
+    this.donationService.makeDonation(this.amount, 3).subscribe({
       next: async (response) => {
         // Load the Stripe.js library
         const stripe = await loadStripe('pk_test_51OD2cRKDCE1r65sMLGSO5UGeP2Y5OhTkurjvW66sxtcveUGG1Tr1qezaUqdTCz2glgb12zOg6LOibxNQvH9oYLIL00V57s61xh');
