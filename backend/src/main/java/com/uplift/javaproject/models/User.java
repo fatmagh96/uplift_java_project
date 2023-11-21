@@ -86,7 +86,7 @@ public class User {
 	private Charity charity;
 
 	// M:M Users to Event = Participants
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "event_participants", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "event_id"))
 	private List<Event> participatedEvents;
 

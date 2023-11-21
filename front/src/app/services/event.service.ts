@@ -21,4 +21,16 @@ export class EventService {
   getAllEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(baseUrl);
   }
+
+  getEventById(eventId: any): Observable<any> {
+    return this.http.get<any>(`${baseUrl}/${eventId}`);
+  }
+
+  participateInEvent(eventId: string | null): any {
+    return this.http.post<any>(`${baseUrl}/participate/${eventId}`, {}, {withCredentials: true})
+  }
+
+  quitEvent(eventId: string | null): any {
+    return this.http.post<any>(`${baseUrl}/quit/${eventId}`, {}, {withCredentials: true})
+  }
 }

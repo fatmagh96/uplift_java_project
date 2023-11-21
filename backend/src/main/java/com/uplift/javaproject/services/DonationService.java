@@ -1,5 +1,6 @@
 package com.uplift.javaproject.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,20 @@ public class DonationService {
     
     public Donation makeDonation(Donation donation) {
         return donationRepo.save(donation);
+    }
+    
+    public List<Donation> getAllDonations(){
+    	return donationRepo.findAll();
+    }
+    
+    
+	public Donation findDonationById(Long id) {
+        Optional<Donation> maybeDonation = donationRepo.findById(id);
+        if(maybeDonation.isPresent()) {
+            return maybeDonation.get();
+        } else {
+            return null;
+        }
     }
     
     public Donation findOne(User donor) {

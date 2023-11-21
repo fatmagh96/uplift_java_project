@@ -40,7 +40,8 @@ const routes: Routes = [
   { path: 'createCharity', component: CreateCharityComponent },
   { path: 'login', component: LoginComponent },
   { path: 'charity/:charityId', component: CharityPageComponent },
-  { path: 'event', component: EventPageComponent },
+  // { path: 'event', component: EventPageComponent },
+  { path: 'events/:eventId', component: EventPageComponent },
   {
     path: 'dashboard', component: DashboardUserComponent,
     children: [

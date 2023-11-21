@@ -1,7 +1,9 @@
 package com.uplift.javaproject.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,6 +53,23 @@ public class EventController {
 	public ResponseEntity<?> allEvents() {
 		return ResponseEntity.ok().body(eventServ.allEvents());
 	}
+	
+    @GetMapping("/events/{eventId}")
+    public ResponseEntity<?> showOne(@PathVariable Long eventId) {
+        try {
+            Event maybeEvent = eventServ.findEventById(eventId);
+
+            if (maybeEvent != null) {
+                return ResponseEntity.ok(maybeEvent);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event not found");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
+        }
+    }
 
 	@PostMapping("/events")
 	public ResponseEntity<Object> createEvent(@Valid @RequestBody EventAndAddressAndCategoriesRequest request,
@@ -132,28 +151,33 @@ public class EventController {
 	
 	// Participate or Quit an Event
 
-	@PostMapping("/events/participate/{eventId}")
-	public ResponseEntity<Object> participateInEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
+    @PostMapping("/events/participate/{eventId}")
+    public ResponseEntity<Object> participateInEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
 
-		User participant = userServ.findUserById((Long) session.getAttribute("user_id"));
-		Event event = eventServ.findEventById(eventId);
+        User participant = userServ.findUserById((Long) session.getAttribute("user_id"));
+        Event event = eventServ.findEventById(eventId);
 
-		event.getParticipants().add(participant);
-		eventServ.updateEvent(event);
-		return ResponseEntity.ok("User successfully participated in Event!");
-	}
+        event.getParticipants().add(participant);
+        eventServ.updateEvent(event);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "User successfully Participate!");
 
-	@PostMapping("/events/quit/{eventId}")
-	public ResponseEntity<Object> quitEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
-		User participant = userServ.findUserById((Long) session.getAttribute("user_id"));
-		Event event = eventServ.findEventById(eventId);
+    @PostMapping("/events/quit/{eventId}")
+    public ResponseEntity<Object> quitEvent(@PathVariable("eventId") Long eventId, HttpSession session) {
 
-		event.getParticipants().remove(participant);
-		eventServ.updateEvent(event);
-		return ResponseEntity.ok("User successfully Quit Event!");
-	}
+        User participant = userServ.findUserById((Long) session.getAttribute("user_id"));
+        Event event = eventServ.findEventById(eventId);
 
+        event.getParticipants().remove(participant);
+        eventServ.updateEvent(event);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "User Quit event!");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 	
 	// delete an Event
 	@DeleteMapping("/events/{eventId}")

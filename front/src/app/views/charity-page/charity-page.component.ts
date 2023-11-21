@@ -6,6 +6,8 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { EventService } from 'src/app/services/event.service';
+import { Event } from 'src/app/models/Event.model';
 
 @Component({
   selector: 'app-charity-page',
@@ -20,6 +22,10 @@ export class CharityPageComponent implements OnInit {
   followedCharities!: Charity[];
   charityId!: string | null;
 
+  eventsList?: Event[] ;
+  eventss?: any[];
+
+  test!: any;
   checked: boolean = true;
 
   session!: string | null;
@@ -30,15 +36,19 @@ export class CharityPageComponent implements OnInit {
     private router: Router,
     private charityService: CharityService,
     private userService: UserService,
+    private eventService: EventService,
     private modalService: MdbModalService
   ){}
 
   async ngOnInit(): Promise<void> {
     try {
         await this.getCharityById();
-        await this.getLoggedUser();
+        // await this.getLoggedUser();
+        this.getLoggedUser();
         
         console.log(this.followedCharities);
+        console.log("eventssss 11", this.eventss);
+        this.test = this.eventss?.at(0)
 
         this.session = sessionStorage.getItem("user_id");
         console.log("session storage",sessionStorage.getItem("user_id"));
@@ -70,6 +80,11 @@ export class CharityPageComponent implements OnInit {
             (response) => {
                 console.log(response);
                 this.charity = response;
+                this.eventsList = response.charityEvents;
+                console.log("event lsit: ", this.eventsList);
+                this.function();
+                console.log("eventssss", this.eventss);
+                
                 resolve();
             },
             (error) => {
@@ -88,12 +103,13 @@ async getLoggedUser(): Promise<void> {
                 console.log(response);
                 this.user = response;
                 this.followedCharities = response.followedCharities;
+                
                 // this.charity = response;
                 resolve();
             },
             (error: any) => {
                 console.log(error);
-                reject();
+                // reject();
             },
             () => console.log("Success getting logged user!")
         );
@@ -133,5 +149,35 @@ async getLoggedUser(): Promise<void> {
       );
     }
   }
+
+  function() {
+    console.log("testetstets11", this.eventsList?.length);
+    console.log('00', this.eventsList?.at(0));
+
+    if (this.eventsList !== undefined) {
+        // Initialize eventss as an empty array if it's not already initialized
+        this.eventss = this.eventss || [];
+
+        if (this.eventsList?.length > 0) {
+            this.eventss.push(this.eventsList[0]);
+            console.log(this.eventss, "broo");
+
+            for (let i = 1; i < this.eventsList.length; i++) {
+                console.log("testettsets");
+
+                this.eventService.getEventById(this.eventsList[i]).subscribe(
+                    (response) => {
+                        console.log("response", response);
+                        this.eventss?.push(response);
+                        // console.log("event List::",this.eventsList);
+
+                    },
+                    (error) => console.log(error),
+                    () => console.log("Done getting Event")
+                );
+            }
+        }
+    }
+}
 
 }

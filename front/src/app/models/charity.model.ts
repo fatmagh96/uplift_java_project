@@ -1,5 +1,7 @@
+import { Event } from "./Event.model";
 import { Address } from "./address.model";
 import { Category } from "./category.model";
+import { Donation } from "./donation.model";
 import { File } from "./file.model";
 import { User } from "./user.model";
 
@@ -21,6 +23,8 @@ export class Charity {
     followers?: User[];
     categories?: Category[];
     files?: File[];
+    charityEvents?: Event[];
+    donationsReceived?: Donation[];
 
 }
 

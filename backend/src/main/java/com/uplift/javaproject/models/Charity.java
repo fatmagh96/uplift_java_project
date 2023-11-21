@@ -92,7 +92,7 @@ public class Charity {
 
 	// M:M Users to Event = Participants
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "charities_followers", 
 						joinColumns = @JoinColumn(name = "charity_id"), 
 						inverseJoinColumns = @JoinColumn(name = "user_id"))

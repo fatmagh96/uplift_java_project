@@ -1,1 +1,39 @@
-<p>charity-donations works!</p>
+
+
+
+
+
+
+  <div class="container mt-4">
+    <div class="row mt-4">
+      <div class="col-md-10 d-flex justify-content-between align-items-center">
+        <h2>Donactions Received</h2>
+      </div>
+    </div>
+    
+    <div class="row mt-2">
+      <div class="col-md-11">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <!-- <th scope="col">Id</th> -->
+                <th scope="col-4">Made By</th>
+                <th scope="col-2">Donor's Email</th>
+                <th scope="col-4">Amount</th>
+                <th scope="col">Received At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let donation of donationsList || []">
+                <td>{{ donation.donor?.firstName }} {{ donation.donor?.lastName }}</td>
+                <td>{{ donation.donor?.email }}</td>
+                <td>${{ donation.amount }}</td>
+                <td>{{ donation.createdAt | date }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

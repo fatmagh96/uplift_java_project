@@ -15,22 +15,47 @@
 
         <div class="header d-flex justify-content-between align-items-center mb-3">
             <h2 class="fw-medium  " style="font-family: Poppins; ">Events</h2>
-            <a href="" class="viewbutton">View More</a>
+            <a routerLink="/events" class="viewbutton">View More</a>
         </div>
         <div class="cards row gap-4 p-3  justify-content-around mb-4 ">
-            <div class="card col-3 p-0" style="font-weight: 400; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <div class="header" style="height: 250px; overflow: hidden;">
-                    <img class="card-img-top"  style="width: 100%; height: 100%; object-fit: cover;" src="https://jamaity.org/wp-content/uploads/2022/06/walah-we-can-500x500.jpg" alt="Card image cap">
-                </div>
-                <div class="card-body">
-                    <h3>Wallah We Can</h3>
-                    <p style="font-size: 14px; font-weight: lighter; color: rgb(55, 55, 55);">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed veniam repudiandae ipsam aliquam, molestias asperiores dicta velit.</p>
-                    <div class="category-pill text-center m" style="width: 90px;">children</div>
-                </div>
-                <!-- <div class="footer p-3">
-                </div> -->
+            <div class="card col-3 p-0"
+                style="font-weight: 400; box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;"
+                *ngFor="let event of events">
+                <a [routerLink]="['/events/', event.id]"
+                    class="text-decoration-none d-flex flex-column justify-content-between  " style="all:unset">
+
+
+                    <div class="header border-top " style="height: 250px; overflow: hidden; border-radius: 10px;">
+                        <img class="card-img-top " style=" width: 100%; height: 250px; object-fit: cover;"
+                            [src]="'http://localhost:8080/uploads/'+event.eventCreator?.files?.at(0)?.path" alt="Card image cap">
+                    </div>
+                    <div class="card-body">
+                        <h3>{{event.title}}</h3>
+                        <p style="font-size: 14px; font-weight: lighter; color: rgb(55, 55, 55); overflow: hidden;">{{
+                            event.description | slice:0:120 }}{{ (event.description ?? '').length > 120 ? '...' : ''
+                            }}</p>
+                        <!-- <div class="category-pill text-center m" style="width: 90px;">children</div> -->
+                    </div>
+
+                    <div class="footer px-2">
+                        <div class="d-flex ">
+                            <span class="category-pill  "
+                                *ngFor="let category of event.eventCategories">{{category.categoryName?.toString()?.replace('_',
+                                ' ')}} </span>
+                        </div>
+                    </div>
+                </a>
             </div>
-            <div class="card col-3 p-0" style="font-weight: 400; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+   
+
+
+
+
+
+
+
+
+            <!-- <div class="card col-3 p-0" style="font-weight: 400; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div class="header" style="height: 250px; overflow: hidden;">
                     <img class="card-img-top"  style="width: 100%; height: 100%; object-fit: cover;" src="https://jamaity.org/wp-content/uploads/2022/06/walah-we-can-500x500.jpg" alt="Card image cap">
                 </div>
@@ -39,8 +64,7 @@
                     <p style="font-size: 14px; font-weight: lighter; color: rgb(55, 55, 55);">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed veniam repudiandae ipsam aliquam, molestias asperiores dicta velit.</p>
                     <div class="category-pill text-center m" style="width: 90px;">children</div>
                 </div>
-                <!-- <div class="footer p-3">
-                </div> -->
+              
             </div>
             <div class="card col-3 p-0" style="font-weight: 400; box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;">
                 <div class="header border-top " style="height: 250px; overflow: hidden; border-radius: 10px;">
@@ -51,23 +75,9 @@
                     <p style="font-size: 14px; font-weight: lighter; color: rgb(55, 55, 55);">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed veniam repudiandae ipsam aliquam, molestias asperiores dicta velit.</p>
                     <div class="category-pill text-center m" style="width: 90px;">children</div>
                 </div>
-                <!-- <div class="footer p-3">
-                </div> -->
-            </div>
-            <!-- <div class="card col-3 p-3  " style="font-weight: 400; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <div class="header" >
-                    <div class="d-flex">
-                        <img src="https://jamaity.org/wp-content/uploads/2022/06/walah-we-can-500x500.jpg" alt="" style="object-fit: contain; width: 200px;" class="justify-content-around m-auto">
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h3>Wallah We Can</h3>
-                    <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed veniam repudiandae ipsam aliquam, molestias asperiores dicta velit.</p>
-                </div>
-                <div class="footer">
-                    <div class="category-pill text-center " style="width: 90px;">children</div>
-                </div>
+               
             </div> -->
+
             
         </div>
         
@@ -75,6 +85,5 @@
     </div>
     </div>
 
-    <!-- <app-card></app-card> -->
 </body>
 </html>

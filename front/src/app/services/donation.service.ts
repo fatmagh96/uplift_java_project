@@ -14,4 +14,13 @@ export class DonationService {
   makeDonation(amount:any, charityId:any): Observable<any> {
     return this.http.post<Donation>(`http://localhost:8080/api/donation/${charityId}`, amount, {withCredentials: true} )
   }
+
+  getAllDonations(): Observable<Donation[]> {
+    return this.http.get<Donation[]>("http://localhost:8080/api/donations");
+  }
+
+  getDonationtById(donationId: any): Observable<any> {
+    return this.http.get<any>(`${"http://localhost:8080/api/donations"}/${donationId}`);
+  }
+
 }
