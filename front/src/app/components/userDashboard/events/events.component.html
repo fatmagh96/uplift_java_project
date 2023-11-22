@@ -18,7 +18,9 @@
                 <td>{{ event.title }}</td>
                 <td>{{ event.startDate | date:'short' }}</td>
                 <td>{{ event.endDate | date:'short' }}</td>
-                <td>{{ event.description }}</td>
+                <td>{{
+                    event.description | slice:0:50 }}{{ (event.description ?? '').length > 50 ? '...' : ''
+                    }}</td>
               </tr>
             
 

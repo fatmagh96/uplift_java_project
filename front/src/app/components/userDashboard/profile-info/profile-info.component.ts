@@ -32,6 +32,7 @@ export class ProfileInfoComponent implements OnInit {
     this.userService.updateUser(this.user).subscribe(
       (response) => {
         console.log(response);
+        alert("User Successfully Updated!!")
       },
       (error) => {
         console.log(error);
@@ -41,9 +42,12 @@ export class ProfileInfoComponent implements OnInit {
   }
 
   onChangePassword(){
+    console.log("aaaaaaaaaaaa", this.user);
+    
     this.userService.changePassword(this.user).subscribe(
       (response) => {
         console.log(response);
+        alert("Password Changed!")
       },
       (error) => {
         console.log(error);

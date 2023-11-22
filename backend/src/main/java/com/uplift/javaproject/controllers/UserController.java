@@ -135,6 +135,7 @@ public class UserController {
 	public ResponseEntity<?> updatePassword(@Valid @RequestBody User newUser, BindingResult result,
 			HttpSession session) {
 		try {
+			System.out.println("newww user:"+ newUser.toString() );
 			Long userId = (Long) session.getAttribute("user_id");
 			System.out.println("session id : " + userId);
 			User user = userServ.findUserById(userId);

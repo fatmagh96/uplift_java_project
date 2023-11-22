@@ -193,19 +193,20 @@ public class CharityController {
 		Address updatedAddress = request.getAddress();
 		existingCharity.getAddress().setStreet(updatedAddress.getStreet());
 		existingCharity.getAddress().setCity(updatedAddress.getCity());
+		existingCharity.getAddress().setZipCode(updatedAddress.getZipCode());
 		
 
-		// Update Categories
-		List<Category> updatedCategories = request.getCategories();
-		List<Category> savedCategories = new ArrayList<>();
-		for (Category category : updatedCategories) {
-		    Category savedCategory = categoryServ.findByCategoryName(category.getCategoryName());
-		    if (savedCategory != null) {
-		        savedCategories.add(savedCategory);
-		    }
-		}
-
-		existingCharity.setCategories(savedCategories);
+//		// Update Categories
+//		List<Category> updatedCategories = request.getCategories();
+//		List<Category> savedCategories = new ArrayList<>();
+//		for (Category category : updatedCategories) {
+//		    Category savedCategory = categoryServ.findByCategoryName(category.getCategoryName());
+//		    if (savedCategory != null) {
+//		        savedCategories.add(savedCategory);
+//		    }
+//		}
+//
+//		existingCharity.setCategories(savedCategories);
 
 		// Save the updated charity
 		Charity updated = charityServ.updateCharity(existingCharity);

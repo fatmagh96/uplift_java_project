@@ -73,6 +73,7 @@ export class EditCharityComponent implements OnInit{
     this.charityService.updateCharity(this.charity!.id?.toString(), this.dto).subscribe(
       (response) => {
         console.log(response);
+        this.router.navigateByUrl("/charityDash");
       },
       (error) => {
         console.log(error);

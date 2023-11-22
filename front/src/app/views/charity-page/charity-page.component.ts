@@ -30,6 +30,8 @@ export class CharityPageComponent implements OnInit {
 
   session!: string | null;
 
+  firstElement!: any ;
+
   modalRef: MdbModalRef<ModalComponent> | null = null;
 
   constructor(private route: ActivatedRoute,
@@ -43,8 +45,8 @@ export class CharityPageComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     try {
         await this.getCharityById();
-        // await this.getLoggedUser();
-        this.getLoggedUser();
+        await this.getLoggedUser();
+        // this.getLoggedUser();
         
         console.log(this.followedCharities);
         console.log("eventssss 11", this.eventss);
@@ -153,16 +155,17 @@ async getLoggedUser(): Promise<void> {
   function() {
     console.log("testetstets11", this.eventsList?.length);
     console.log('00', this.eventsList?.at(0));
-
+    this.firstElement = this.eventsList?.at(0);
     if (this.eventsList !== undefined) {
-        // Initialize eventss as an empty array if it's not already initialized
-        this.eventss = this.eventss || [];
+      // Initialize eventss as an empty array if it's not already initialized
+      this.eventss = this.eventss || [];
 
-        if (this.eventsList?.length > 0) {
-            this.eventss.push(this.eventsList[0]);
+
+        if (this.eventsList?.length > 1) {
+            // this.eventss.push(this.eventsList[0]);
             console.log(this.eventss, "broo");
 
-            for (let i = 1; i < this.eventsList.length; i++) {
+            for (let i = 0; i < this.eventsList.length; i++) {
                 console.log("testettsets");
 
                 this.eventService.getEventById(this.eventsList[i]).subscribe(
@@ -177,6 +180,25 @@ async getLoggedUser(): Promise<void> {
                 );
             }
         }
+        else{
+          this.eventss.push(this.eventsList[0]);
+          console.log(this.eventss, "broo");
+
+          for (let i = 1; i < this.eventsList.length; i++) {
+              console.log("testettsets");
+
+              this.eventService.getEventById(this.eventsList[i]).subscribe(
+                  (response) => {
+                      console.log("response", response);
+                      this.eventss?.push(response);
+                      // console.log("event List::",this.eventsList);
+
+                  },
+                  (error) => console.log(error),
+                  () => console.log("Done getting Event")
+              );
+          }
+      }
     }
 }
 
