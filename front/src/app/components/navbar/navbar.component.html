@@ -32,10 +32,10 @@
         <button *ngIf="isLoggedIn" class="btn btn-light px-2 py-1"  style="white-space: nowrap;">My Account</button>
         <ul class="drop-down">
           <li>
-            <a routerLink="/dashboard" class=" px-2 py-1 text-black ">Profile</a>
+            <a routerLink="/dashboard" class=" px-2 py-1 text-black underline">Profile</a>
           </li>
-          <li>
-            <a  routerLink="/charityDash" class="px-2 py-1" style="white-space: nowrap;">Charity</a>
+          <li *ngIf="user.charity" >
+            <a  routerLink="/charityDash" class=" px-2 py-1 text-black underline">Charity</a>
           </li>
           <li>
             <a (click)="logout()" class="btn btn-light px-2 py-1" style="color: rgb(37, 37, 123);">Logout</a>

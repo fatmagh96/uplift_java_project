@@ -11,30 +11,32 @@
     
 }
 
+
 .category-pill {
-    // font-family: sofia-pro;
-    font-style: normal;
-    font-weight: 400;
-    text-decoration: none;
-    // position: absolute;
-    // bottom: 18px;
-    padding: 5px 10px;
-    color: #49516f;
-    border-radius: 8px;
-    background-color: #f2f3f7;
+  // font-family: sofia-pro;
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: none;
+  font-size: 14px;
+  // position: absolute;
+  // bottom: 18px;
+  padding: 5px 8px;
+  margin-left: 3px;
+  color: #49516f;
+  border-radius: 8px;
+  background-color: #f2f3f7;
 }
 
 
 .card {
-    // width: 200px;
-    height: 440px;
-    // background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
-  }
-  
+  width: 350px;
+  height: 460px;
+  // background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
   .card:hover {
     transform: scale(1.05);
     cursor: pointer; /* You can change the cursor style here */

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Event } from 'src/app/models/Event.model';
+import { Charity } from 'src/app/models/charity.model';
 import { User } from 'src/app/models/user.model';
 import { EventService } from 'src/app/services/event.service';
 import { UserService } from 'src/app/services/user.service';
@@ -15,6 +16,7 @@ export class EventPageComponent implements OnInit {
   eventId!: string | null;
   event!: Event;
   user!: User;
+  charity!: Charity;
 
   participatedEvents!: Event[];
   checked: boolean = true;
@@ -58,6 +60,7 @@ export class EventPageComponent implements OnInit {
         (response) => {
           console.log(response);
           this.event = response;
+          this.charity = response.eventCreator;
           resolve();
         },
         (error) => {
@@ -76,7 +79,7 @@ export class EventPageComponent implements OnInit {
           console.log(response);
           this.user = response;
           this.participatedEvents = response.participatedEvents;
-          // this.charity = response;
+          
           resolve();
         },
         (error: any) => {

@@ -1,8 +1,8 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css');
 body {
     // background-color: #f3f3f3;
-    min-height: 1300px;
-
+    // min-height: 1300px;
+    margin-bottom: 20px;
     --size: 200px;
     --radius: calc(var(--size) * 20 / 100);
     
@@ -59,17 +59,18 @@ body {
 
 // *************
 .category-pill {
-  // font-family: sofia-pro;
-  font-style: normal;
-  font-weight: 400;
-  color: #353c55;
-  background-color: #f2f3f7;
-  margin-right: 8px;
-  padding: 7px 9px;
-  border-radius: 8px;
-  text-decoration: none;
-  margin-top: 2px;
-  height: 36px;
+    // font-family: sofia-pro;
+    font-style: normal;
+    font-weight: 400;
+    text-decoration: none;
+    font-size: 14px;
+    // position: absolute;
+    // bottom: 18px;
+    padding: 5px 8px;
+    margin-left: 3px;
+    color: #49516f;
+    border-radius: 8px;
+    background-color: #f2f3f7;
 }
 
 .location {

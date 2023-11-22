@@ -26,7 +26,7 @@ export class CharityPageComponent implements OnInit {
   eventss?: any[];
 
   test!: any;
-  checked: boolean = true;
+  checked: boolean = false;
 
   session!: string | null;
 

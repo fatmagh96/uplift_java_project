@@ -20,7 +20,7 @@
                     <div class="card-body">
                         <h3>{{charity.name}}</h3>
                         <p style="font-size: 14px; font-weight: lighter; color: rgb(55, 55, 55); overflow: hidden;">{{
-                            charity.description | slice:0:120 }}{{ (charity.description ?? '').length > 120 ? '...' : ''
+                            charity.description | slice:0:100 }}{{ (charity.description ?? '').length > 100 ? '...' : ''
                             }}</p>
                         <!-- <div class="category-pill text-center m" style="width: 90px;">children</div> -->
                     </div>

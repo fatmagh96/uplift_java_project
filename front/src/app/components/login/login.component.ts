@@ -11,7 +11,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
   user: User = new User();
+  // user!: User;
   loginUser: User = new User();
+  // loginUser!: User;
 
   constructor(
     private userService: UserService,
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit {
       (response) =>{
         console.log(response);
         sessionStorage.setItem('user_id', String(response.id))
-        this.router.navigateByUrl("/dashboard");
+        this.router.navigateByUrl("/");
         // this.router.navigate();
       } ,
       (error) => console.log(error),

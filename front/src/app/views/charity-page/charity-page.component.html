@@ -61,31 +61,39 @@
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos voluptatum eum consectetur dolore minima officia ex ab accusamus maxime! At optio sint modi tenetur molestias hic corporis perspiciatis animi debitis!</p>
                 </div> -->
                 <div class="card mb-4" style="width: auto;" *ngFor="let event of eventss">
+                    <a class="text-decoration-none text-black " routerLink="/events/{{event.id}}">
                     <div class="row g-3">
                         <div class="col-md-3 bg-danger ">
                             
-                            <h2 class="text-light text-center ">14 Nov 2032</h2>
+                            <h2 class="text-light text-center d-flex flex-column justify-content-center align-content-center align-items-center my-3">
+                                <h2>{{event.startDate | date: 'dd'}}</h2>
+                                <h2>{{event.startDate | date: 'MMM'}}</h2>
+                                <h2>{{event.startDate | date: 'yyyy'}}</h2>
+                            </h2>
                         </div>
                         <div class="col-md-8 mt-2">
                             <div class="card-body d-flex flex-column justify-content-evenly  ">
-                                <h3 class="card-title mb-3" style="font-weight: 400; font-size: 20px;">Wallah we can
+                                <h3 class="card-title mb-3" style="font-weight: 400; font-size: 20px;">{{event.title}}
                                 </h3>
 
                                 <p class="card-text d-flex align-content-center  ">
 
-                                    <i class="fa-sharp fa-solid fa-location-dot"></i>
-                                    <span class=" location">Cite de la culture</span>
+                                    <i class="fa-sharp fa-solid fa-location-dot" style="padding-top: 4px;"></i>
+                                    <span class=" location">{{event.eventAddress.street}}, {{event.eventAddress.city.toString()?.replace('_', ' ')}}</span>
+                                    <!-- {{charityData.address?.city?.toString()?.replace('_', ' ')}} -->
                                 </p>
-                                <p><i class="fa-regular fa-clock"></i> 14 Nov 2023</p>
+                                <p><i class="fa-regular fa-clock me-1 "></i><span class="fw-bold ">Start: </span>{{event.startDate | date: "dd MMM yyyy 'at' HH:mm"}} <span *ngIf="event.endDate" ><span class="fw-bold ">End: </span>End: {{event.endDate | date: "dd MMM yyyy 'at' HH:mm"}}</span></p>
+                                <!-- <p style="margin-left: 19px;">End: {{event.endDate | date: "dd MMM yyyy 'at' HH:mm"}}</p> -->
                                 <div class="d-flex ">
-                                    <span class="category-pill  ">HEALTHCARE</span>
-                                </div>
+                                    <span class="category-pill  " *ngFor="let category of event.eventCategories">{{category.categoryName?.toString()?.replace('_', ' ')}} </span>
+                                  </div>
 
 
                              
                             </div>
                         </div>
                     </div>
+                </a>
                 </div>
 
             
@@ -137,14 +145,14 @@
                                 d="M256 73.825a182.18 182.18 0 0 0-182.18 182.18c0 100.617 81.567 182.17 182.18 182.17a182.175 182.175 0 1 0 0-364.35zm-93.061 115.972h186.127l.008.03L256 247.865l-93.07-58.04zm202.195 122.598a19.522 19.522 0 0 1-19.52 19.52H166.378a19.525 19.525 0 0 1-19.52-19.52V209.317a19.926 19.926 0 0 1 .308-3.34l102.998 64.23c.132.08.264.132.396.211.132.07.272.14.413.211a10.967 10.967 0 0 0 2.242.87c.079.018.157.044.236.061a11.318 11.318 0 0 0 2.541.317h.017a11.35 11.35 0 0 0 2.544-.317c.075-.017.154-.043.234-.06a11.582 11.582 0 0 0 2.25-.87c.132-.07.272-.14.408-.212.128-.079.268-.132.392-.211l102.99-64.23a19.025 19.025 0 0 1 .307 3.34v103.078z"
                                 data-name="Mail" />
                         </svg><span class="fw-bold fs-5" style="vertical-align: middle;">Email</span></div>
-                    <p class="ms-4 mt-2 ">{{email}}</p>
+                    <p class="ms-4 mt-2 ">{{charity.email}}</p>
 
                     <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="37" class="me-1">
                             <path
                                 d="M256 73.825a182.175 182.175 0 1 0 182.18 182.18A182.177 182.177 0 0 0 256 73.825zm78.715 116.007-69.143 158.555a6.292 6.292 0 0 1-5.775 3.77c-.132 0-.264 0-.404-.01a6.3 6.3 0 0 1-5.643-4.525l-19.248-65.874-65.874-19.248a6.3 6.3 0 0 1-.747-11.822l158.546-69.143a6.298 6.298 0 0 1 8.288 8.297z"
                                 data-name="Location" />
                         </svg><span class="fw-bold fs-5" style="vertical-align: middle;">Address</span></div>
-                    <p class="ms-4 mt-2 ">{{charity.address?.street}}, {{charity.address?.city}}
+                    <p class="ms-4 mt-2 ">{{charity.address?.street}}, {{charity.address?.city?.toString()?.replace('_', ' ')}}
                         {{charity.address?.zipCode}}</p>
                 </div>
                 <!-- <a class="btn btn-success mt-2 ">Donate</a> -->
@@ -152,9 +160,9 @@
 
         </div>
     </div>
-    <app-footer></app-footer>
-
+    
 </body>
+<app-footer></app-footer>
 
 <script>
     function demo() {

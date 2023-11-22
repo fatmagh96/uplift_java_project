@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <h3>{{event.title}}</h3>
                         <p style="font-size: 14px; font-weight: lighter; color: rgb(55, 55, 55); overflow: hidden;">{{
-                            event.description | slice:0:120 }}{{ (event.description ?? '').length > 120 ? '...' : ''
+                            event.description | slice:0:80 }}{{ (event.description ?? '').length > 80 ? '...' : ''
                             }}</p>
                         <!-- <div class="category-pill text-center m" style="width: 90px;">children</div> -->
                     </div>
